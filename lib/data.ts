@@ -1,527 +1,630 @@
-export interface Flashcard {
-  q: string;
-  a: string;
-  sub?: string;
-}
+// CLAS 104 — Complete Course Data — All 4 Units
+// Fully audited against all 17 PDF modules
 
-export interface Deck {
-  name: string;
-  color: 'gold' | 'terra' | 'olive' | 'slate';
-  cards: Flashcard[];
-}
-
-export interface LongAnswer {
-  category: string;
-  categoryLabel: string;
-  question: string;
-  answer: string;
-}
-
-export interface God {
-  greek: string;
-  roman: string;
-  domain: string;
-  symbols: string;
-  myths: string;
-  color: string;
-}
-
-export interface TimelineItem {
-  date: string;
-  title: string;
-  desc: string;
-  importance?: 'high' | 'medium';
-}
-
-export interface TheoryItem {
-  name: string;
-  thinker: string;
-  summary: string;
-  detail: string;
-  strength: string;
-  weakness: string;
-}
-
-export const DECKS: Deck[] = [
+export const moduleNotes = [
   {
-    name: 'Gods & Romans',
-    color: 'gold',
-    cards: [
-      { q: 'Roman name for Zeus', a: 'Jupiter (also Jove)', sub: 'Sky god, thunderbolt, cloud-gatherer, father of gods' },
-      { q: 'Roman name for Hera', a: 'Juno', sub: 'Queen of gods, goddess of marriage and childbirth' },
-      { q: 'Roman name for Poseidon', a: 'Neptune', sub: 'God of the sea, earthquakes, horses' },
-      { q: 'Roman name for Demeter', a: 'Ceres', sub: 'Goddess of grain, agriculture, fertility' },
-      { q: 'Roman name for Athena', a: 'Minerva', sub: 'Goddess of wisdom, strategic war, crafts' },
-      { q: 'Roman name for Apollo', a: 'Apollo (unchanged)', sub: 'God of sun, music, prophecy, healing, archery' },
-      { q: 'Roman name for Artemis', a: 'Diana', sub: 'Goddess of hunt, wilderness, moon, virginity' },
-      { q: 'Roman name for Aphrodite', a: 'Venus', sub: 'Goddess of erotic love and procreation' },
-      { q: 'Roman name for Ares', a: 'Mars', sub: 'God of war — much more important to Romans than Greeks' },
-      { q: 'Roman name for Hephaestus', a: 'Vulcan', sub: 'God of the forge and fire' },
-      { q: 'Roman name for Hermes', a: 'Mercury', sub: 'Messenger god, psychopompos, god of thieves' },
-      { q: 'Roman name for Dionysus', a: 'Bacchus', sub: 'God of wine, theatre, ecstasy, madness' },
-      { q: 'Roman name for Hades', a: 'Pluto / Dis', sub: 'God of the underworld; Pluto means "wealthy"' },
-      { q: 'Roman name for Persephone', a: 'Proserpina', sub: 'Queen of the underworld, goddess of spring' },
-      { q: 'Roman name for Eros', a: 'Cupid', sub: 'God of love — later depicted as son of Aphrodite' },
-      { q: 'Roman name for Kronos', a: 'Saturn', sub: 'Titan ruler before Zeus; swallowed his children' },
-      { q: 'Roman name for Ouranos', a: 'Uranus', sub: 'Primordial sky god; castrated by Kronos' },
-      { q: 'Roman name for Gaia', a: 'Terra / Gaea', sub: 'Primordial earth goddess; mother of the Titans' },
+    id: "1a", unit: 1, title: "Myth and Mythology",
+    summary: "Defines myth as a traditional story of sacred/collective importance involving supernatural beings. Distinguishes myth from legend (historical basis) and folktale (entertainment). Surveys major interpretive theories.",
+    keyTerms: ["myth", "legend", "folktale", "aetiological", "allegory", "Euhemerism", "Freud", "Jung", "structuralism", "functionalism", "archetype", "collective unconscious"],
+    mustKnow: [
+      "Aetiological myths explain origins of natural/cultural phenomena",
+      "Euhemerism: gods were originally deified historical humans (Euhemerus, 4th c. BCE)",
+      "Freud: Oedipus complex — unconscious desire of son for mother, rivalry with father; myths reveal repressed desires",
+      "Jung: archetypes (Hero, Shadow, Anima, Trickster, Great Mother) in the collective unconscious",
+      "Functionalism (Malinowski): myths reinforce social norms, validate rituals, justify institutions — myth as social charter",
+      "Structuralism (Lévi-Strauss): myths express binary oppositions (nature/culture, life/death) — meaning lies in relationships",
+      "Rationalization/Euhemerism: myths are distorted historical accounts"
     ],
+    likelyExam: ["Discuss TWO theories for interpreting Greek myths with examples", "What is an aetiological myth? Give an example."]
   },
   {
-    name: 'God Domains',
-    color: 'terra',
-    cards: [
-      { q: "Apollo's main domains (list 6)", a: 'Youth, music, prophecy, healing/purification, poetry, archery', sub: 'Also: initiation of young men, revenge, punishment' },
-      { q: "Athena's main domains", a: 'Wisdom, war (strategic), crafts, civilization, cities', sub: 'Born from Zeus\'s head after he swallowed Metis (wisdom)' },
-      { q: "Artemis's main domains", a: 'Wilderness, hunting, virginity, childbirth, moon, sudden death', sub: 'Paradox: virgin goddess of childbirth; born first, helped deliver Apollo' },
-      { q: "Aphrodite's three defining character traits", a: 'Seductive charm, fertility, deception', sub: 'These mirror Pandora\'s description in Hesiod — not coincidental' },
-      { q: "Three goddesses immune to Aphrodite's power", a: 'Athena, Artemis, Hestia — all virgins', sub: 'Stated at the opening of the Homeric Hymn to Aphrodite' },
-      { q: 'Ares vs Athena on war — contrast', a: 'Ares = destructive/brutal war; Athena = strategic/protective/civilizing war', sub: 'Iliad Book 5: Diomedes wounds Ares; Zeus rebukes him harshly' },
-      { q: 'Why was Mars (Roman Ares) more culturally important?', a: 'Romans: victorious conquest AND crops/harvest. Father of Romulus and Remus', sub: 'Greeks held Ares in relatively low esteem; Romans elevated Mars' },
-      { q: "Hermes' main roles", a: 'Messenger of the gods, psychopompos (guide of souls), god of thieves, travelers, commerce', sub: 'Also: inventor of the lyre; stole Apollo\'s cattle as infant (Homeric Hymn)' },
-      { q: "Demeter's domain and key myth", a: 'Grain, agriculture, fertility of earth; linked to ending of cannibalism', sub: 'Eleusinian Mysteries connected to her search for Persephone' },
-      { q: "Dionysus' domains", a: 'Wine, theatre (tragedy and comedy), ecstasy, madness, fertility', sub: 'Twice-born: from Semele (struck by lightning) and from Zeus\'s thigh' },
-      { q: "Zeus as god of justice", a: 'Connected to Themis (his 2nd wife, justice personified) and Dike (his daughter = justice)', sub: 'Holds golden scales to weigh fate, e.g. when Hector meets Achilles' },
-      { q: "Zeus's oracle at Dodona", a: 'Oldest Greek oracle; Epirus, NW Greece; prophesied through holy oak tree sounds and doves', sub: 'Consulted as pan-Hellenic oracle; possibly older than Delphi' },
-      { q: "Hephaestus's role", a: 'God of fire and the forge; divine craftsman; made armour for Achilles; lame god', sub: 'Married to Aphrodite who cheats with Ares; caught them in a golden net' },
+    id: "1b", unit: 1, title: "Greek and Roman Religion",
+    summary: "Polytheistic, anthropomorphic religion with no single sacred text. Gods have human personalities and failings. Ritual sacrifice and oracle consultation central. Olympian vs. chthonic gods is a key distinction.",
+    keyTerms: ["polytheism", "anthropomorphic", "chthonic", "panhellenic", "oracle", "sacrifice", "hubris", "Pythia", "Delphi"],
+    mustKnow: [
+      "12 Olympians: Zeus, Hera, Poseidon, Demeter, Athena, Apollo, Artemis, Ares, Aphrodite, Hephaestus, Hermes, Dionysus (or Hestia)",
+      "Greek gods are anthropomorphic — human form, personalities, weaknesses, loves, jealousies",
+      "No single sacred text; myths told in multiple competing versions",
+      "Hubris: excessive pride/arrogance toward the gods — always punished",
+      "Oracle at Delphi: Apollo's sanctuary; Pythia (priestess) delivers prophecies; most important oracle in Greek world",
+      "Olympian gods vs. Chthonic gods: Olympians at altars above ground; chthonic (Hades, Persephone, Hecate) with offerings in pits",
+      "Sacrifice: burnt offerings — gods get fragrant smoke, humans eat the meat"
     ],
+    likelyExam: ["What role did religion play in ancient Greek society?", "What is hubris and how does it function in myth?"]
   },
   {
-    name: 'Key Myths',
-    color: 'olive',
-    cards: [
-      { q: 'First Succession Myth (Theogony)', a: 'Kronos castrates Ouranos with a sickle. Aphrodite born from sea foam around severed genitals near Cyprus.', sub: 'Blood produces Furies, Giants, Tree Nymphs; genitals produce Aphrodite' },
-      { q: 'Second Succession Myth (Theogony)', a: 'Zeus hidden in Crete; Rhea gives Kronos a stone. Zeus forces regurgitation of siblings, defeats Titans.', sub: 'Hurrian parallel: Kumarbi castrates Anu. Close cultural connections.' },
-      { q: 'Prometheus — crime and punishment', a: 'Tricked Zeus at sacrifice (bones/fat to gods, meat to humans); stole fire in fennel stalk. Punished: eagle eats his liver daily forever.', sub: 'Fire = symbol of technology, advancement, civilization' },
-      { q: "Pandora's story", a: 'Created by Hephaestus at Zeus\'s order as punishment for Prometheus. Opens jar releasing all evils; only Hope remains inside.', sub: 'Hesiod: deeply misogynistic; she parallels Eve (both bring evil through curiosity)' },
-      { q: 'The myth of Daphne', a: 'Cupid strikes Apollo (gold arrow = love) and Daphne (lead arrow = repulsion). She transforms into a laurel tree to escape Apollo.', sub: 'Explains Apollo\'s laurel crown; his first great failed love affair' },
-      { q: 'The myth of Actaeon', a: 'Hunter accidentally sees Artemis bathing on Mt. Cithaeron; she turns him into a stag; his own hounds tear him apart.', sub: 'Theme: violation of divine virginity — even accidental — demands death' },
-      { q: 'The myth of Niobe', a: 'Boasts she surpasses Leto (12 children vs 2). Apollo kills her 6 sons; Artemis kills her 6 daughters. Niobe weeps into a rock.', sub: 'Theme: hubris against the gods. Her father is Tantalus.' },
-      { q: 'The myth of Hyacinthus', a: 'Spartan youth Apollo loves; killed by a discus (or Zephyrus redirects it jealously). His blood becomes the hyacinth flower.', sub: 'Connects Apollo to male youth and love; shows his healing limits' },
-      { q: 'The myth of Marsyas', a: 'Satyr picks up flute discarded by Athena; challenges Apollo to music contest; loses; Apollo skins him alive.', sub: 'Athena discarded flute because it distorted her face; Apollo\'s revenge aspect' },
-      { q: 'Aphrodite and Anchises', a: 'Zeus makes Aphrodite fall for mortal shepherd Anchises to humble her. Their son is Aeneas, future founder of Rome.', sub: 'From the Homeric Hymn to Aphrodite — key source for Aeneid connection' },
-      { q: 'The myth of Adonis', a: 'Aphrodite hides him in a chest; gives him to Persephone; both love him. Zeus decrees he splits the year between them. Killed by a boar → anemone flower.', sub: 'Near Eastern origin (Semitic Adon = Lord). Represents seasonal death/rebirth.' },
-      { q: 'Pygmalion and Galatea', a: 'Disgusted by Cypriot women, fashions ivory statue, falls in love, prays to Aphrodite; she brings it to life as Galatea.', sub: 'Inspired Shaw\'s Pygmalion and the musical My Fair Lady' },
-      { q: 'Cupid and Psyche — key plot', a: 'Psyche\'s beauty outrages Venus. After 4 impossible tasks (ants, reeds, eagle, tower help), Cupid saves her; Jupiter approves; Psyche becomes goddess.', sub: 'Themes: love, mortality/immortality, curiosity as female vice, death and resurrection' },
-      { q: 'The myth of Arachne', a: 'Mortal weaver challenges Athena; wins but Athena strikes her. Arachne hangs herself; Athena transforms her into a spider.', sub: 'Hubris against a god; from Ovid\'s Metamorphoses. Explains spiders.' },
-      { q: 'Callisto', a: 'Hunting nymph raped by Zeus disguised as Diana. Pregnancy discovered; expelled. Turned into bear; placed as Ursa Major constellation.', sub: 'In Ovid: Hera turns her; in Greek versions: Artemis does. Son = Arcas' },
-      { q: 'How does Orpheus die (Ovid)?', a: 'Torn apart by Maenads — women whose advances he spurned after Eurydice\'s death.', sub: 'His severed head continues singing even after death; floats to Lesbos' },
-      { q: 'Why does Orpheus fail to retrieve Eurydice?', a: 'He looks back at her as she follows him — the one condition Hades set.', sub: 'His inability to trust or endure uncertainty undoes everything' },
+    id: "1c", unit: 1, title: "Greek and Roman History Overview",
+    summary: "Historical context: Bronze Age Mycenae provides the historical seed for many myths. Homer's epics reflect a mix of Bronze Age details and later Iron Age reality. Romans adopt Greek mythology wholesale.",
+    keyTerms: ["Bronze Age", "Mycenaean", "Dark Ages", "Archaic", "Classical", "Hellenistic", "polis", "dactylic hexameter"],
+    mustKnow: [
+      "Timeline: Bronze Age (1600-1100 BCE) → Dark Ages → Archaic (~800-500) → Classical (~500-323) → Hellenistic → Roman",
+      "Mycenae: real Bronze Age city; Schliemann excavated it and Troy in 19th century",
+      "Homer's epics reflect Bronze Age (chariots, armor) AND Iron Age — layered tradition",
+      "Classical Athens: democracy, tragedy, philosophy — myth is central to cultural life",
+      "Rome adopts Greek mythology wholesale; gods renamed (Zeus→Jupiter, etc.)",
+      "Key authors: Homer, Hesiod (8th c. BCE); Aeschylus, Sophocles, Euripides (5th c. BCE); Virgil, Ovid (1st c. BCE/CE)"
     ],
+    likelyExam: ["How does historical context shape mythological tradition?"]
   },
   {
-    name: 'Trojan War',
-    color: 'gold',
-    cards: [
-      { q: 'Root cause of the Trojan War', a: 'Judgment of Paris: he chose Aphrodite (offering Helen) over Hera (power) and Athena (wisdom). Paris then abducted Helen from Menelaus.', sub: 'Triggered by the apple of Eris at the wedding of Peleus and Thetis' },
-      { q: 'Gods who supported the Greeks', a: 'Hera, Athena, Poseidon (consistently); Hermes (occasionally)', sub: 'Hera and Athena: furious after the Judgment of Paris' },
-      { q: 'Gods who supported the Trojans', a: 'Aphrodite, Apollo, Ares, Artemis, Leto', sub: 'Apollo especially: rains plague arrows on Greeks at start of Iliad' },
-      { q: "Achilles' fundamental character flaw", a: 'Extreme pride (hubris/honor-consciousness — timê). Withdraws from battle over a dispute with Agamemnon about Briseis.', sub: 'His wrath (menis) is the subject of the Iliad\'s first word and the entire poem' },
-      { q: 'Who brought Achilles from Scyros?', a: 'Odysseus — Achilles was hiding in disguise among women to avoid the war.', sub: 'His mother Thetis hid him knowing he would die at Troy' },
-      { q: 'What was the Trojan Horse?', a: 'Giant wooden horse built by Epeius (with Athena\'s help); Greeks hidden inside; Trojans brought it inside; Greeks emerged at night.', sub: 'Odysseus\'s scheme; Trojan priest Laocoon warned against it but was ignored' },
-      { q: 'Who was Neoptolemus (Pyrrhus)?', a: 'Son of Achilles; fought at Troy after his father\'s death; killed Priam at the altar of Zeus.', sub: 'Name Pyrrhus relates to his blond/fiery hair' },
-      { q: "What happened to Agamemnon on return?", a: 'Murdered by wife Clytemnestra and her lover Aegisthus (his cousin) upon returning home from Troy.', sub: 'Avenged by his son Orestes — subject of Aeschylus\'s Oresteia trilogy' },
-      { q: "Helen in Euripides' version", a: 'A phantom went to Troy; the real Helen was taken to Egypt by Hermes and remained faithful to Menelaus.', sub: "Euripides' Helen (412 BCE) — deliberately subverts the standard tradition" },
-      { q: 'What is the Iliad literally about?', a: 'The wrath of Achilles — approximately 50 days near the end of the 10-year war, centered on Achilles\' withdrawal, return, and killing of Hector.', sub: 'NOT the whole Trojan War; begins in medias res (in the middle of things)' },
-      { q: 'Which Trojan escaped the Fall of Troy?', a: 'Aeneas — goes on to found the line leading to Rome (Vergil\'s Aeneid).', sub: 'Hector, Priam, Paris all died; Troy was sacked, burned, looted' },
+    id: "4a", unit: 2, title: "Hesiod's Theogony and Creation",
+    summary: "Hesiod's Theogony (~700 BCE) is the fullest Greek creation account. From Chaos to the birth of the Titans, Cronus's overthrow of Uranus, Zeus's defeat of the Titans, to the Five Ages of Man.",
+    keyTerms: ["Theogony", "Chaos", "Gaia", "Uranus", "Cronus", "Rhea", "Titans", "Titanomachy", "Five Ages", "Cyclopes", "Hecatonchires"],
+    mustKnow: [
+      "Creation order: Chaos → Gaia + Tartarus + Eros → Gaia produces Uranus → Uranus + Gaia = Titans, Cyclopes, Hecatonchires",
+      "Uranus imprisons Titans underground; Gaia persuades Cronus to castrate Uranus with a sickle",
+      "From Uranus's blood/sea-foam: Aphrodite born",
+      "Cronus swallows each child at birth; Rhea hides Zeus in Crete, gives Cronus a stone wrapped in cloth",
+      "Zeus frees siblings, defeats Titans (Titanomachy), imprisons them in Tartarus",
+      "Five Ages: Gold (Cronus, peaceful, no toil) → Silver (impious) → Bronze (violent warriors) → Heroic (demigods; Troy/Thebes) → Iron (present: toil, injustice)",
+      "Iron Age = Hesiod's own era; deeply pessimistic outlook"
     ],
+    likelyExam: ["Describe the Five Ages of Man and what each reveals about Hesiod's worldview", "How does Zeus come to power?"]
   },
   {
-    name: 'Theban Saga',
-    color: 'slate',
-    cards: [
-      { q: 'Who founded Thebes and how?', a: 'Cadmus — Delphic oracle told him to follow a cow and found a city where it lay down, in Boeotia.', sub: 'Killed a dragon; sowed its teeth; Spartoi (sown men) arose and fought each other' },
-      { q: "What does 'Spartoi' mean?", a: 'Sown men — warriors who sprang from dragon teeth Cadmus sowed. Five survivors became Theban noble ancestors.', sub: "From Greek 'speirein' = to sow" },
-      { q: "Oedipus's prophecy", a: 'He would kill his father and marry his mother.', sub: 'Both fulfilled unknowingly: kills Laius on the road, marries Jocasta' },
-      { q: 'Why was Paris exposed as a baby?', a: 'His mother Hecuba had a dream/prophecy that he would be the destruction of Troy.', sub: 'Some versions: oracle that he would kill his father (Priam)' },
-      { q: 'Answer to the Riddle of the Sphinx', a: 'Man — walks on four legs in morning (crawls as infant), two at noon (adult), three in evening (elderly with cane).', sub: 'Oedipus answered correctly; Sphinx killed herself; he received the throne and Jocasta' },
-      { q: 'Why does Polynices raise an army against Eteocles?', a: 'Eteocles refused to step down after his turn ruling Thebes (they agreed to alternate years).', sub: 'Seven Against Thebes; both brothers die in single combat' },
-      { q: 'Who are the Epigoni?', a: 'Sons of the Seven Against Thebes — they successfully sacked Thebes in the next generation.', sub: "Epigoni = 'those born after'; avenged their fathers' failure" },
-      { q: 'Tantalus: crime and punishment', a: 'Crime: served his son Pelops to the gods to test them. Standard punishment: stands in water under fruit, both recede when he reaches.', sub: "Pindar's version: huge rock suspended over his head forever. His name = 'tantalize'" },
-      { q: 'How did Pelops win Hippodamia?', a: 'Chariot race against her father Oenomaus. Bribed Myrtilus to sabotage Oenomaus\'s chariot; Oenomaus died.', sub: 'Pelops later betrayed and killed Myrtilus — the curse on the House of Atreus begins here' },
-      { q: 'Amphion and Zethus — who did they kill?', a: 'Killed Lycus, the usurper who had enslaved their mother Antiope. Sons of Zeus and Antiope.', sub: 'Amphion built Thebes\' walls by playing his lyre — stones moved to music' },
+    id: "4b", unit: 2, title: "Works and Days — Prometheus and Pandora",
+    summary: "Prometheus steals fire for humanity; Zeus punishes him eternally. Pandora created as punishment. Her jar releases all evils; only Hope remains. Prometheus as culture hero and trickster.",
+    keyTerms: ["Prometheus", "Epimetheus", "Pandora", "Elpis (Hope)", "culture hero", "trickster", "Aeschylus", "Prometheus Bound"],
+    mustKnow: [
+      "Prometheus tricks Zeus at Mecone: wraps bones in fat for gods, hides meat in stomach for humans",
+      "Zeus hides fire; Prometheus steals it from Olympus in a fennel stalk",
+      "Prometheus chained to a rock; eagle eats his liver daily (it regenerates) — eternal punishment; later freed by Heracles",
+      "Pandora: first woman, created by gods as punishment — 'beautiful evil'; Hephaestus forms from clay; gods gift beauty, cunning, deceit",
+      "Epimetheus ('Afterthought') accepts Pandora despite Prometheus's warning",
+      "Pandora opens the jar: all evils, diseases, sufferings escape; only Elpis (Hope) remains inside",
+      "Prometheus as culture hero: fire/technology/civilization against divine will",
+      "Aeschylus's Prometheus Bound: heroic rebel; knows Zeus's secret about Thetis"
     ],
+    likelyExam: ["Compare Prometheus and Pandora as figures representing humanity's relationship to the gods", "What does Pandora's myth reveal about Greek views of women?"]
   },
   {
-    name: 'Underworld & Afterlife',
-    color: 'slate',
-    cards: [
-      { q: "Overall impression of the dead in Odyssey Book 11", a: 'They are mainly just there in the same state without distinction — pale, weak, purposeless shades.', sub: 'No moral economy; not punished or rewarded; death is total loss of vitality' },
-      { q: 'Sinners punished in Homer\'s Underworld — what was their crime?', a: 'Crimes against the gods themselves — Tantalus, Sisyphus, Tityos all offended the Olympians.', sub: 'Ordinary dead are NOT punished; this is a key contrast with Vergil and Plato' },
-      { q: 'What must Aeneas bring to enter the underworld?', a: 'A golden bough — as instructed by the Sibyl of Cumae.', sub: 'Parallel to Odyssey Book 11; the Sibyl guides him as Circe guides Odysseus' },
-      { q: "Aeneas's final vision in the underworld (Aeneid)", a: 'The souls of future Roman heroes — parade of Roman greats shown by his father Anchises.', sub: "Vergil's political vision: the Aeneid as Rome's founding myth" },
-      { q: "Plato's Myth of Er — what choice did the first soul make?", a: 'Chose the life of a tyrant — out of greed and without wisdom. Later wept at the consequences.', sub: 'Lesson: experience from past lives does NOT guarantee good choices' },
-      { q: 'Most severely punished in Plato\'s Myth of Er', a: 'Tyrants — specifically Ardiaeus, a tyrant who murdered his own father.', sub: 'Punished 10x the evil done in life; murderers and family betrayers also punished severely' },
-      { q: 'Sisyphus — crime and punishment', a: 'Punishment: eternally rolling a boulder up a hill, only for it to roll back. Crime: cheated death twice.', sub: 'First tricked Persephone into releasing him; then tricked Thanatos (Death) itself' },
-      { q: 'Tityos — crime and punishment', a: 'Punishment: vulture eats his liver anew every day (like Prometheus). Crime: attempted to rape Leto (mother of Apollo and Artemis).', sub: 'Apollo and/or Artemis killed him; lies stretched across 9 acres in Tartarus' },
-      { q: "Tantalus's punishment (standard version)", a: 'Stands in water under fruit trees: water recedes when he drinks; fruit rises when he reaches.', sub: "Pindar's version: enormous rock hangs over his head forever" },
-      { q: 'What is Elysium / the Elysian Fields?', a: 'Paradise section of the underworld for great heroes and the especially virtuous.', sub: 'Tartarus = punishment zone; Asphodel Fields = neutral zone for ordinary dead' },
-      { q: 'Who is Charon?', a: 'Ferryman who transports souls across the river Styx (or Acheron) to Hades. Required payment: coins on eyes or in mouth.', sub: 'If unburied, souls wait 100 years on the bank before Charon takes them' },
-      { q: 'Orpheus and the underworld', a: 'His music charms Cerberus, stills Styx, moves Hades and Persephone to release Eurydice. He fails because he looks back.', sub: 'His powers = musical ability (Apollo connection); death = Maenads (Dionysus connection)' },
+    id: "5a", unit: 2, title: "Apollo and Artemis",
+    summary: "Twin children of Zeus and Leto, born on Delos. Apollo: god of light, music, prophecy, healing, plague, rationality. Artemis: hunt, moon, chastity. Both carry bows and punish offenses against them or their mother.",
+    keyTerms: ["Apollo", "Artemis", "Leto", "Delos", "Daphne", "laurel", "Niobe", "Actaeon", "Calisto", "Hyacinthus", "Pythia"],
+    mustKnow: [
+      "Born on Delos: Hera jealous, forbids all land to receive Leto; Delos (floating island) accepts her",
+      "Apollo's domains: music/arts, prophecy/oracle, sun/light, healing AND plague, archery, rationality",
+      "Pythia at Delphi: sits over volcanic fissure, speaks Apollo's words; consulted before wars, colonization, major decisions",
+      "Daphne: Apollo pursues; she transforms into laurel tree; Apollo adopts laurel as his symbol",
+      "Hyacinthus: Apollo's beloved; killed by jealous Zephyr deflecting a discus; becomes hyacinth flower",
+      "Niobe boasts 14 children surpass Leto's two → Apollo kills 7 sons, Artemis kills 7 daughters → Niobe weeps to stone — classic hubris",
+      "Actaeon sees Artemis bathing → turned to stag → killed by own dogs",
+      "Callisto: sworn to chastity; seduced by Zeus; expelled; turned to bear by Hera → Ursa Major",
+      "Apollo vs Dionysus: rationality/order vs ecstasy/chaos — key course theme"
     ],
+    likelyExam: ["How does Niobe illustrate hubris?", "Compare Apollo and Artemis as divine twins"]
   },
   {
-    name: 'Authors & Sources',
-    color: 'olive',
-    cards: [
-      { q: 'Dactylic hexameter — define', a: "The metrical form of Greek epic (Iliad, Odyssey, Hesiod's works). Each line has 6 feet; a dactyl = one long + two short syllables.", sub: "Also called 'heroic meter.' Standard form for epic poetry." },
-      { q: "Hesiod's two major works", a: 'Theogony (origins of gods and succession myths) and Works and Days (Five Ages, Prometheus, Pandora).', sub: 'Boeotian poet; contemporaneous with or slightly earlier than Homer' },
-      { q: "Homer's two major works", a: 'Iliad (Trojan War, wrath of Achilles) and Odyssey (return of Odysseus to Ithaca).', sub: 'Both in dactylic hexameter; c. late 8th–early 7th century BCE' },
-      { q: 'What are the Homeric Hymns?', a: 'Collection of 33 hymns in Homeric dialect and meter; not all by same author. Long hymns contain mythological narratives of gods\' births and key events.', sub: 'Key for Apollo, Aphrodite, Demeter, Hermes; used as preludes to recitations' },
-      { q: "Ovid's major work for mythology", a: 'Metamorphoses — 15 books of Latin verse retelling Greek/Roman myths, focused on transformations. Also: Fasti (Roman calendar myths).', sub: 'Active c. 20s BCE–17 CE; exiled by Augustus in 8 CE' },
-      { q: "Vergil's major work", a: 'The Aeneid — Latin epic on Aeneas\'s journey from Troy to Italy; founding myth of Rome.', sub: 'Augustan age; deliberately modelled on Homer. Aeneid Book 6 = underworld descent' },
-      { q: "Apuleius's significance", a: 'Metamorphoses / The Golden Ass (2nd century CE): contains Cupid and Psyche and the speech of Isis. Key for mystery religions.', sub: 'The Isis speech is one of the key syncretistic religious texts of antiquity' },
-      { q: "Pindar's significance", a: 'Greek lyric poet; Olympian Odes celebrate athletic victors. Key source for Tantalus, Pelops — provides alternative punishments.', sub: "In Olympian 1: rejects 'impious' versions of myths as too scandalous" },
-      { q: 'Three great Greek tragedians', a: 'Aeschylus, Sophocles, Euripides — all 5th century BCE (Classical Period)', sub: 'Aeschylus: Oresteia; Sophocles: Oedipus Rex; Euripides: Medea, Helen, Hippolytus, Bacchae' },
-      { q: "Euripides' Helen — what's innovative?", a: 'A phantom went to Troy; real Helen stayed in Egypt, faithful to Menelaus. Questions whether the entire war was pointless.', sub: '412 BCE; deliberately subversive of standard tradition; anti-war themes' },
+    id: "5b", unit: 2, title: "Aphrodite and Athena",
+    summary: "Two contrasting goddesses — love and wisdom/war. Aphrodite from sea-foam; Athena from Zeus's head. Both play roles in the Judgment of Paris. Key myths: Aphrodite/Ares affair, Adonis, Cupid and Psyche, Arachne's weaving contest.",
+    keyTerms: ["Aphrodite", "Venus", "Eros", "Adonis", "Psyche", "Hephaestus", "Ares", "Athena", "Minerva", "Arachne", "aegis", "Judgment of Paris"],
+    mustKnow: [
+      "Aphrodite born from sea-foam (aphros) around Uranus's severed genitals cast into sea by Cronus",
+      "Married Hephaestus; loves Ares; caught in invisible net — exposed to gods",
+      "Adonis: beautiful mortal shared between Aphrodite and Persephone; killed by boar",
+      "Cupid/Psyche: Eros falls for Psyche himself rather than making her love a monster",
+      "Judgment of Paris: Aphrodite bribes Paris with Helen → Trojan War",
+      "Athena born fully-armed from Zeus's head — swallowed mother Metis to prevent prophecy",
+      "Athena's domains: wisdom, weaving/crafts, warfare (strategy), justice",
+      "Arachne: weaves tapestry showing gods' crimes; Athena destroys it; Arachne hangs herself → transformed to spider",
+      "Athens: Athena wins naming contest vs Poseidon (olive tree vs salt spring)",
+      "Aegis: Athena's shield bearing Medusa's head after Perseus quest"
     ],
+    likelyExam: ["What does Arachne's myth reveal about gods and mortals?", "Compare Aphrodite and Athena"]
   },
   {
-    name: 'Myth Theories',
-    color: 'terra',
-    cards: [
-      { q: 'Define Etiology', a: "Myths that explain causes or origins (Greek 'aitia' = cause). They explain why things exist or happen the way they do.", sub: "Example: Homeric Hymn to Demeter explains Eleusinian Mysteries founding" },
-      { q: "Freud's view of myth", a: 'Myths fulfill repressed wishes — like dreams. Oedipus complex: we desire our mothers and resent our fathers. Myth = waking dream.', sub: 'Weakness: over-generalizes; does not account for cultural differences' },
-      { q: "Jung's contribution", a: 'Myths are projections of the collective unconscious — shared unconscious patterns of all humanity. Mythic images are archetypes of behaviour.', sub: 'Extended Freud beyond sexuality to universal human psychological patterns' },
-      { q: "Frazer's approach", a: 'Linked myth inseparably to religious ritual. Myth and ritual are two sides of the same coin.', sub: 'Author of The Golden Bough; heavily influenced subsequent myth scholarship' },
-      { q: "Malinowski's approach", a: 'Polish anthropologist: you must live within a culture to understand its myths. Myths reflect specific social customs and beliefs — not universal allegories.', sub: 'Criticized Freudian over-generalization; championed cultural particularity' },
-      { q: "Lévi-Strauss and structuralism", a: 'Myths mediate structural binary opposites fundamental to human thought (raw/cooked, nature/culture, male/female, mortal/immortal).', sub: 'These binary structures are universal across cultures; find them beneath individual details' },
-      { q: "Walter Burkert's synthesis", a: 'Grounded structuralist approaches in specific cultural/religious context. Myth cannot be separated from its historical context but shares structural sequences across cultures.', sub: 'Inclusive: accepts structuralism, psychology, AND historical/religious grounding' },
-      { q: 'Feminist approaches to myth', a: 'Focus on psychological and social situations of female characters. Questions patriarchal assumptions embedded in myths like Pandora and the Actaeon stories.', sub: 'Greco-Roman society had radically different gender norms; modern views shape readings' },
-      { q: 'Max Müller and allegory', a: 'All myths are allegories of natural/cosmological phenomena (sun, seasons, stars). Apollo = the sun; his arrows = sunrays.', sub: '19th century; now seen as far too reductive — cannot explain most mythological content' },
+    id: "6a", unit: 2, title: "Demeter and Persephone",
+    summary: "Homeric Hymn to Demeter: Persephone abducted by Hades with Zeus's consent. Demeter's grief causes famine. Persephone eats pomegranate seeds — must return to underworld each year. Origin of seasons. Foundation of the Eleusinian Mysteries.",
+    keyTerms: ["Demeter", "Persephone (Kore)", "Hades", "pomegranate", "Eleusinian Mysteries", "Hecate", "Helios", "Iambe/Baubo", "Triptolemus", "Demophon"],
+    mustKnow: [
+      "Persephone gathering flowers; earth splits; Hades erupts and abducts her — Zeus consented beforehand",
+      "Only Hecate (hears cries) and Helios (sees from sky) witness it",
+      "Demeter wanders 9 days without eating/drinking/bathing; earth becomes barren — famine threatens gods AND humans",
+      "At Eleusis: disguised as old woman; nurses infant Demophon; making him immortal in fire; Metaneira interrupts → Demeter reveals herself",
+      "Iambe (or Baubo): makes Demeter laugh with obscene jokes — first time she smiles",
+      "Zeus sends Hermes to retrieve Persephone; Hades gives her pomegranate seeds before she leaves",
+      "6 seeds = ~6 months underground; Demeter mourns → autumn/winter; Persephone returns → spring/summer",
+      "Eleusinian Mysteries: secret rites at Eleusis; promised blessed afterlife; practiced ~2000 years; never revealed",
+      "Triptolemus: taught agriculture by Demeter; spreads grain cultivation"
     ],
+    likelyExam: ["Explain Demeter/Persephone as an aetiological myth", "What were the Eleusinian Mysteries?"]
+  },
+  {
+    id: "6b", unit: 2, title: "Dionysus",
+    summary: "God of wine, ecstasy, theatre, and vegetation. Twice-born: from Zeus's thigh after Semele's death. Connected to both Apollo (Delphi shared) and mystery religion. Euripides' Bacchae dramatizes the catastrophic confrontation between Dionysiac ecstasy and rational order.",
+    keyTerms: ["Dionysus", "Bacchus", "Semele", "Maenads/Bacchantes", "thyrsus", "sparagmos", "omophagia", "Pentheus", "Agave", "Bacchae", "Orphism", "dithyramb"],
+    mustKnow: [
+      "Semele burned when Zeus revealed divine form (Hera's trick); Zeus sews fetal Dionysus into his thigh — 'twice-born'",
+      "As infant: Titans tear apart and eat him (omophagia); Athena saves his heart; Zeus reconstitutes him",
+      "Maenads/Bacchantes: female devotees in ecstasy; carry thyrsus (fennel staff), fawn skins; roam mountains",
+      "Theatre: Athenian drama (tragedy AND comedy) performed at Festival of Dionysus; chorus originated in dithyrambs",
+      "Pentheus (Bacchae): denies Dionysus is a god; manipulated into dressing as woman to spy on Maenads; torn apart (sparagmos) by Maenads including his mother Agave",
+      "Dionysus vs Apollo: Dionysiac (irrational, emotional, collective) vs Apolline (rational, individual, ordered) — Nietzsche later develops this",
+      "Connection to Orphism: Dionysus/Zagreus myth underpins mystery religion of reincarnation and soul purification"
+    ],
+    likelyExam: ["Analyze Dionysus and Pentheus in the Bacchae", "How does Dionysus differ from other Olympians?"]
+  },
+  {
+    id: "7a", unit: 3, title: "The Underworld in Greco-Roman Mythology",
+    summary: "Hades is simultaneously god and place. The Greek underworld receives ALL the dead — not just sinners. This is fundamentally different from the Christian Hell. Post-classical Christians adopted the term 'Hades' to mean Hell, but the ancient concept was amoral.",
+    keyTerms: ["Hades", "Pluto", "Charon", "Cerberus", "Styx", "Lethe", "Acheron", "Tartarus", "Elysium", "Asphodel Fields", "Isle of the Blessed", "obol", "Minos"],
+    mustKnow: [
+      "Hades = god's name AND place — post-classical Christians adopted 'Hades' for Hell, but that is NOT the ancient conception",
+      "All mortals go to Hades — good or bad. NOT a moral judgment. Post-classical Christians adopted 'Hades' for Hell — but ancient Hades is amoral, NOT a punishment",
+      "Asphodel Fields: most people; neutral; pale continuation of life",
+      "Tartarus: for those who offended GODS (Tantalus, Sisyphus, Ixion, Tityus) — deepest pit",
+      "Elysium: very few heroic/divinely-favoured souls",
+      "Isle of the Blessed: souls who chose Elysium three lifetimes — ultimate reward (Hesiod)",
+      "Intermediary: heroes occupy space between gods and ordinary mortals",
+      "Charon: ferryman; needs obol (coin); unburied wait 100 years on banks",
+      "Cerberus: three-headed dog; lets dead in, prevents escape",
+      "Rivers: Styx (oath of gods), Lethe (forgetfulness), Acheron (woe), Phlegethon (fire), Cocytus (lamentation)"
+    ],
+    likelyExam: ["How does Greek underworld differ from Christian Hell?", "Describe the geography and key figures of the Greek underworld"]
+  },
+  {
+    id: "7b", unit: 3, title: "Orpheus",
+    summary: "Greatest musician in antiquity. Son of Muse Calliope (or Apollo). Semi-divine from Thrace. His descent to the underworld for Eurydice and his failure at the threshold is one of the most powerful love stories in Western literature. His death creates the Orphic mystery religion.",
+    keyTerms: ["Orpheus", "Eurydice", "Aristaeus", "katabasis", "lyre", "Calliope", "Maenads", "sparagmos", "Orphism", "metempsychosis"],
+    mustKnow: [
+      "Orpheus: greatest musician; son of Muse Calliope or Apollo; from Thrace; semi-divine",
+      "Music tames wild animals, moves rocks, stops rivers, charms gods — even the dead",
+      "Sailed with Jason; his music drowned out the Sirens",
+      "Eurydice: bitten by snake on wedding day (or while fleeing Aristaeus)",
+      "Katabasis (descent to underworld): charms Cerberus, Furies weep, Sisyphus stops his boulder, Tantalus forgets hunger — Hades and Persephone moved",
+      "Condition: lead Eurydice out WITHOUT looking back",
+      "At the threshold of the upper world: looks back — from love, doubt, or impatience; Eurydice pulled back; no second negotiation",
+      "After: wanders in grief, renounces women; Thracian Maenads tear him apart (sparagmos); head floats to Lesbos still singing — becomes oracle; lyre → Lyra constellation",
+      "Orphism: mystery cult; texts attributed to Orpheus; teaches metempsychosis (reincarnation), soul purification, liberation from cycle; influenced Plato"
+    ],
+    likelyExam: ["What does Orpheus and Eurydice suggest about love and loss?", "Discuss Orphism and its significance"]
+  },
+  {
+    id: "7c", unit: 3, title: "The Afterlife in Homer",
+    summary: "Earliest literary underworld in Homer's Odyssey Book 11 (the Nekuia). Gloomy, democratic, amoral — all the dead go there. Spirits are shadows until they drink blood. Achilles famously regrets his choice of glory over life. Punishment only for offending gods — not for crimes against humans.",
+    keyTerms: ["Nekuia", "Odyssey Book 11", "Tiresias", "Elpenor", "Anticleia", "Achilles", "Agamemnon", "Tantalus", "Sisyphus", "blood ritual", "burial rites"],
+    mustKnow: [
+      "Nekuia = journey to consult the dead; Odyssey Book 11; written ~8th-7th c. BCE",
+      "Blood ritual: Odysseus digs trench, pours offerings, spirits crowd toward blood — drink it to regain consciousness/speech",
+      "Elpenor: crewman who died drunk (fell off Circe's roof, broke neck); appears first; was unburied; begs for proper burial rites — burial a crucial religious obligation in Greece",
+      "Tiresias: even in death retains prophetic powers; tells Odysseus about Cattle of Helios and suitors",
+      "Anticleia: Odysseus's own MOTHER — she died of grief waiting for him; he didn't know she was dead",
+      "Achilles: Odysseus says 'you rule over the dead'; Achilles: 'I'd rather be the poorest slave on earth than rule all the dead' — complete reversal of his Iliad values",
+      "Agamemnon: describes his murder by Clytemnestra; warns Odysseus not to trust women",
+      "Tantalus: in pool, fruit overhead — both recede when he reaches (origin of 'tantalize')",
+      "Sisyphus: rolls boulder uphill forever; it always rolls back. His sin: told river god Asopus about Zeus and Aegina; later TRAPPED DEATH (Thanatos) so no humans died until Ares freed Death — Zeus punished him",
+      "Homer's punishment: only for sinning against GODS specifically — NOT for crimes against humans (contrast with Virgil)"
+    ],
+    likelyExam: ["Describe Homer's vision of the underworld", "Why is Achilles's speech about death in Odyssey 11 significant?"]
+  },
+  {
+    id: "7d", unit: 3, title: "The Afterlife According to Plato",
+    summary: "Plato's Republic Book 10 (Myth of Er) and Phaedo radically transform the afterlife through philosophy. Soul (psyche) is immortal; body is a prison. Er returns from death to report judgment, punishment/reward (10x), reincarnation, and the River Lethe. Only true philosophers escape the cycle.",
+    keyTerms: ["Plato", "Myth of Er", "Republic Book 10", "Phaedo", "psyche (soul)", "reincarnation", "metempsychosis", "Lethe", "choice of lives"],
+    mustKnow: [
+      "Plato rejects Homer's amoral underworld entirely",
+      "Phaedo: soul is immortal; body is a temporary prison; death frees the soul",
+      "Myth of Er: soldier killed in battle, revives and reports what he saw in the afterlife",
+      "Souls judged: righteous sent upward for 1,000 years; sinners underground — each suffers punishment 10× the wrong done",
+      "After 1,000 years: souls gather; choose their NEXT LIFE freely — but choice reflects habits from previous lives (wise vs. foolish choice)",
+      "Souls drink from River Lethe (forgetfulness): forget everything, are reborn",
+      "Cycle escape: only true philosophers who have lived virtuously across multiple lives can eventually live as pure souls",
+      "Key difference from Homer: Plato's underworld is MORAL — how you lived determines your fate"
+    ],
+    likelyExam: ["Compare Plato's afterlife with Homer's", "What is the Myth of Er?"]
+  },
+  {
+    id: "7e", unit: 3, title: "The Afterlife in Virgil",
+    summary: "Virgil's Aeneid Book 6 (19 BCE) gives the most detailed and influential ancient underworld. Aeneas guided by the Sibyl to visit Anchises. Incorporates Platonic reincarnation, Roman patriotism, and the story of Dido's silent condemnation. Directly influenced Dante and Milton.",
+    keyTerms: ["Aeneid", "Aeneas", "Sibyl of Cumae", "Anchises", "golden bough", "Misenus", "Dido", "Tartarus", "Elysium", "Fields of Mourning", "Tisiphone", "Gate of Ivory", "Gate of Horn"],
+    mustKnow: [
+      "Prerequisite: Aeneas must bury his companion Misenus (drowned for challenging Triton) and obtain the golden bough",
+      "Sibyl guides Aeneas — parallels Tiresias in Odyssey 11; golden bough (sacred to Persephone) grants living man safe passage",
+      "Unburied souls wait 100 years on Acheron banks before Charon will ferry them",
+      "Dido (Carthaginian queen Aeneas abandoned, causing her suicide): appears in Fields of Mourning; refuses to speak to Aeneas — turns away in silent condemnation",
+      "Fields of Mourning: special section for those who died of tragic love — not full punishment",
+      "Tartarus: guarded by Tisiphone (Fury); punishes those who sinned against GODS and those who committed crimes against HUMANS — expansion of Homer's purely god-focused punishment",
+      "Specific Tartarus sinners: Ixion (wheel), Tityus (liver eaten), Sisyphus, Tantalus, plus corrupt judges and parricides",
+      "Elysium: heroes and future Romans; Anchises shows Aeneas parade of unborn Roman souls awaiting reincarnation — patriotic dimension",
+      "Gates: Gate of Horn (true dreams), Gate of Ivory (false dreams); Aeneas exits via Gate of Ivory — debated by scholars",
+      "Virgil influenced Dante's Inferno (Virgil is Dante's guide) and Milton's Paradise Lost (Cerberus imagery). J.K. Rowling's three-headed dog Fluffy in Harry Potter was also inspired by Cerberus — the PDF course explicitly uses this connection"
+    ],
+    likelyExam: ["How does Virgil's underworld expand on Homer's?", "What is the significance of Dido's silence in Aeneid 6?"]
+  },
+  {
+    id: "8a", unit: 3, title: "The Theban Saga",
+    summary: "Thebes founded by Cadmus (Europa's brother). His descendants haunted by curses and catastrophe. Center: Oedipus — who despite every precaution kills his father and marries his mother. Saga continues through his children: Seven Against Thebes, Antigone's defiance of Creon.",
+    keyTerms: ["Cadmus", "Spartoi", "Laius", "Jocasta", "Oedipus", "Sphinx", "hamartia", "anagnorisis", "Antigone", "Creon", "Polynices", "Eteocles", "Tiresias", "mythnapping", "Oedipus complex"],
+    mustKnow: [
+      "Cadmus: sent to find Europa; oracle tells him follow a cow and found a city → Boeotia/Thebes; kills Ares's serpent; Athena says sow its teeth → Spartoi ('sown men') spring up fully armed, fight; five survivors = founding families",
+      "Oracle to Laius: son will kill him; exposes infant Oedipus on Mount Cithaeron with pierced ankles ('Oedipus' = swollen foot); shepherd gives to Corinthian; raised as Polybus and Merope's son",
+      "Oedipus at Delphi: told he'll kill father and marry mother; flees Corinth; at triple crossroads unknowingly kills Laius",
+      "Sphinx terrorises Thebes: monster with woman's face, lion's body, eagle's wings — SENT BY HERA, had learned its riddle from the Muses. Kills all who cannot answer. Oedipus answers 'Man' → Sphinx destroys herself; Creon (Jocasta's brother) offers throne + Jocasta as reward",
+      "Freud named the Oedipus Complex directly after this myth — the course explicitly connects them",
+      "Plague: oracle says find Laius's killer; Tiresias warns to stop; shepherd reveals truth; Jocasta hangs herself; Oedipus blinds himself with her dress pins",
+      "Oedipus at Colonus: dies mysteriously at Athens near Colonus; tomb protects Athens = 'mythnapping' (hero's power claimed by Athens)",
+      "Seven Against Thebes: Polynices vs Eteocles; both sons kill each other in single combat; Amphiaraus and Adrastus notable among the Seven",
+      "Menoeceus: Creon's son; sacrifices himself to save Thebes — oracle demands it",
+      "Antigone: defies Creon's order not to bury Polynices; condemned to cave; Haemon (her fiancé, Creon's son) kills himself over her body; Creon's wife Eurydice kills herself — full chain of consequences"
+    ],
+    likelyExam: ["What makes Oedipus a tragic hero?", "Discuss fate vs. free will in the Theban saga"]
+  },
+  {
+    id: "8b", unit: 3, title: "The Mycenaean Saga",
+    summary: "The House of Atreus carries a curse through four generations. Subject of Aeschylus's Oresteia — the only surviving Greek tragic trilogy. Culminates in the first murder trial, establishing civic law over blood vengeance. Cassandra's curse is a key exam topic.",
+    keyTerms: ["Tantalus", "Pelops", "Myrtilus", "Atreus", "Thyestes", "Aegisthus", "Agamemnon", "Clytemnestra", "Iphigenia", "Cassandra", "Orestes", "Electra", "Furies (Erinyes)", "Oresteia", "Areopagus"],
+    mustKnow: [
+      "Tantalus: serves son Pelops to gods (to test omniscience or honor them); Demeter accidentally eats shoulder; gods restore Pelops with ivory shoulder; Tantalus eternally in Tartarus ('tantalize' origin)",
+      "Pelops: wins Hippodamia by bribing charioteer Myrtilus to replace linchpins with wax; Oenomaus crashes and dies; Pelops throws Myrtilus into sea to avoid paying; dying Myrtilus curses Pelops's entire lineage",
+      "Atreus vs Thyestes: Thyestes seduces Atreus's wife + steals golden lamb; Atreus 'reconciles', serves Thyestes his own sons at feast; Aegisthus conceived by Thyestes specifically for revenge",
+      "Agamemnon: sacrifices daughter Iphigenia at Aulis for fair winds to Troy (Artemis becalmed fleet); alternative: Artemis substitutes a deer, takes her to Tauris; Clytemnestra never forgives him",
+      "Cassandra's curse: Apollo loved Cassandra; she refused him; cursed to always tell the truth but NEVER be believed; foresaw the Trojan Horse AND her own death — no one listened",
+      "Clytemnestra + Aegisthus murder Agamemnon: net thrown over him in bath, multiple stab wounds; Cassandra also killed",
+      "Orestes: returns with Pylades; Electra helps plan revenge; kills Aegisthus then Clytemnestra (matricide)",
+      "Furies (Erinyes): ancient goddesses of blood vengeance, especially against family; immediately pursue Orestes after matricide",
+      "Trial at Areopagus (Athens): first murder trial; jury tied; Athena casts deciding vote FOR acquittal; establishes civic courts over blood-vengeance cycle",
+      "Source: Aeschylus's Oresteia trilogy (458 BCE) — Agamemnon, Libation Bearers, Eumenides"
+    ],
+    likelyExam: ["Trace the curse of the House of Atreus", "How does Aeschylus use the Oresteia to explore justice?"]
+  },
+  {
+    id: "9a", unit: 3, title: "Origins of the Trojan War",
+    summary: "The Trojan War begins with the Judgment of Paris and Helen's abduction. The oath of her suitors binds the Greek alliance. Paris's character, Helen's ambiguous portrayal, and Euripides' phantom theory are all exam-relevant.",
+    keyTerms: ["Helen", "Menelaus", "Paris (Alexander)", "Priam", "Hecuba", "Eris", "golden apple", "Judgment of Paris", "Tyndareus oath", "Hermione", "Dioscuri", "xenia"],
+    mustKnow: [
+      "Helen: daughter of Zeus (swan) and Leda; semi-divine; sister of Clytemnestra and Dioscuri (Castor and Pollux); wife of Menelaus; mother of Hermione",
+      "Tyndareus oath: all great heroes courted Helen including ODYSSEUS (who chose not to pursue her). All suitors swore on the parts of a sacrificed horse to defend whoever married her; Menelaus chosen",
+      "Judgment of Paris: Eris (Strife) throws golden apple 'for the most beautiful' at Peleus and Thetis's wedding — she wasn't invited",
+      "Paris: son of Priam and Hecuba; exposed as infant (Hecuba dreamed of firebrand destroying Troy); raised by shepherd on Mount Ida; suckled by bear in some versions",
+      "Three bribes: Hera (power/kingdoms); Athena (victory in war); Aphrodite (most beautiful woman = Helen)",
+      "Paris chooses Aphrodite → visits Sparta as Menelaus's guest; takes Helen to Troy (violates xenia — guest-friendship sacred to Zeus)",
+      "Menelaus invokes the oath → Agamemnon assembles ~1000-ship Greek alliance",
+      "Euripides' Helen (412 BCE): only a phantom went to Troy; real Helen kept virtuously in Egypt by gods; entire war fought over an illusion",
+      "Helen's portrayal: Iliad ambiguous — longs for home AND attracted to Paris; Greeks disagree on her culpability"
+    ],
+    likelyExam: ["Explain the Judgment of Paris", "How is Helen portrayed differently in different ancient sources?"]
+  },
+  {
+    id: "9b", unit: 3, title: "Homer, the Iliad, and Oral Poetry",
+    summary: "Homer is the most important author in the classical tradition. The Iliad (15,600 lines) and Odyssey (12,100 lines) are both in dactylic hexameter and preserve evidence of a long oral tradition. The Iliad covers weeks in Year 10 of the Trojan War, centered on Achilles's rage.",
+    keyTerms: ["Homer", "Iliad", "Odyssey", "dactylic hexameter", "oral tradition", "formulaic epithets", "rhapsode", "Achilles", "Hector", "Patroclus", "Briseis", "Chryses", "Trojan Horse", "Schliemann", "Nestor's Cup"],
+    mustKnow: [
+      "Homer — ancient biography says blind poet; probably legendary; epics composed ~8th c. BCE",
+      "Dactylic hexameter: six feet per line, mainly dactyls (long-short-short); oldest Greek poetic form; aid to memorization and performance",
+      "Oral tradition: singers (rhapsodes) composed and transmitted from memory; formulaic language = memory aids",
+      "Formulaic epithets: repeated stock phrases — 'wine-dark sea', 'rosy-fingered Dawn', 'swift-footed Achilles', 'brilliant Odysseus'",
+      "Nestor's Cup: archaeological evidence — inscription ~750 BCE on Ischia island references cup from Iliad Book 11; proves Iliad known by 8th c.",
+      "Schliemann: 19th-century archaeologist excavated Hissarlik (Turkey) = ancient Troy; one stratum (~1200 BCE) matches Bronze Age destruction",
+      "Diomedes is Athena's favourite: she grants him such strength that he wounds both ARES and APHRODITE on the battlefield — driving them off. Bronze/Iron Age confusion in Homer: describes Bronze Age society (chariots, bronze) but sometimes mentions iron — layered poetic tradition",
+      "Iliad begins Year 10: plague from Apollo because Agamemnon dishonors priest Chryses (refuses to return daughter Chryseis); Agamemnon takes Achilles's Briseis as compensation → Achilles's rage (menis)",
+      "Patroclus: wears Achilles's armor, fights brilliantly, killed by Hector; Achilles's grief overcomes his rage → returns to avenge friend",
+      "Achilles kills Hector; drags body; Priam comes alone to ransom it; Achilles weeps with him — sees his own father; Iliad ends with Hector's funeral",
+      "Achilles's death (AFTER Iliad): Paris's arrow to vulnerable heel guided by Apollo",
+      "Trojan Horse: Odysseus's idea; built by Epeus; Greeks hide inside; Trojans take it in; Cassandra and Laocoon warn — not believed; Troy sacked"
+    ],
+    likelyExam: ["What is the significance of Achilles' choice between glory and long life?", "Explain oral poetry and how it shaped the Homeric epics"]
+  },
+  {
+    id: "10a", unit: 4, title: "Odysseus (Ulysses) — Overview and the Odyssey",
+    summary: "The Odyssey covers Odysseus's ten-year homecoming. Unique hero: polymetis ('of many minds'), values intelligence over strength. The poem follows three threads: Telemachus's growth, Penelope's defense of the household, and Odysseus's wanderings. Penelope is his female counterpart.",
+    keyTerms: ["Odysseus", "Ulysses", "Odyssey", "nostoi", "Telemachus", "Penelope", "Athena", "Poseidon", "Nausicaa", "Phaeacians", "Alcinous", "Calypso"],
+    mustKnow: [
+      "Nostoi: Greek homecoming epics after Troy; most lost; Odysseus's is the only full-length surviving one",
+      "Odyssey: 24 books (Greek alphabet letters); Odysseus aided by Athena, hindered by Poseidon",
+      "Books 1-4 (Telemachy): Telemachus comes of age; visits Nestor at Pylos and Menelaus at Sparta",
+      "Books 5-8: Gods free Odysseus from Calypso; Poseidon shipwrecks him; Nausicaa (Phaeacian princess) finds him naked on beach; brought to King Alcinous and Queen Arete on Scheria",
+      "Books 9-12: Odysseus recounts all adventures at Alcinous's feast",
+      "Books 14-24: Ithaca; disguise; suitors; contest; slaughter; reunion",
+      "Odysseus's character: polymetis; cunning; adaptable; skilled liar; contrasted with Achilles (strength/glory) and Heracles (brute force)",
+      "Penelope: female counterpart — equally clever (loom ruse = beggar disguise); equally loyal; their reunion after 20 years is the epic's emotional peak"
+    ],
+    likelyExam: ["What qualities define Odysseus as a hero?", "How is Penelope Odysseus's equal?"]
+  },
+  {
+    id: "10b", unit: 4, title: "Odysseus's Journey — The Ten Adventures",
+    summary: "Ten major adventures from Troy to Ithaca. Each tests different aspects of Odysseus's character. The geography spans the known Mediterranean world and beyond. The crew's failure with the Cattle of Helios results in their deaths.",
+    keyTerms: ["Cicones", "Lotus Eaters", "Polyphemus", "Cyclops", "Aeolus", "Laestrygonians", "Circe", "Elpenor", "moly", "Sirens", "Scylla", "Charybdis", "Helios", "Calypso"],
+    mustKnow: [
+      "1. Cicones (Ismarus): raids city; spares priest Maron (gives 12 jars of potent wine — used on Cyclops); crew lingers; 72 men lost",
+      "2. Lotus Eaters: storm drives to North Africa; scouts eat lotus → forget home; Odysseus drags them back",
+      "3. Polyphemus (Cyclops): curiosity leads into cave; Cyclops seals them in; eats 6 men; Odysseus: Maron's wine + 'Nobody' (Outis) trick + sharpened stake blinds him; escape under sheep; reveals real name — Poseidon becomes enemy",
+      "4. Aeolus: bag of adverse winds; crew opens it (think it's gold) → blown back; Laestrygonians (giant cannibals) sink ALL ships except Odysseus's own",
+      "5. Circe: transforms crew to pigs; Hermes gives Odysseus herb moly; he resists; sleeps with Circe one year; she directs him to underworld",
+      "6. Underworld (Nekuia): meets Elpenor (drunk, fell off Circe's roof — needs burial), Tiresias, mother Anticleia, Achilles, Agamemnon, Tantalus, Sisyphus",
+      "7. Sirens: female creatures; lure with beautiful singing; wax in crew's ears; Odysseus tied to mast",
+      "8. Charybdis and Scylla: whirlpool that swallows ships 3×/day; six-headed Scylla takes six men; chooses to lose six rather than all",
+      "9. Cattle of Helios: warned by BOTH Tiresias and Circe; crew disobeys while Odysseus sleeps; Zeus destroys ship; Odysseus alone survives",
+      "10. Calypso: 7 years on her island; she offers immortality; he refuses — wants home; Zeus finally compels her release"
+    ],
+    likelyExam: ["Describe three adventures and what they reveal about Odysseus's character", "Why does Odysseus refuse Calypso's immortality?"]
+  },
+  {
+    id: "10c", unit: 4, title: "Odysseus's Return Home",
+    summary: "Odysseus arrives at Ithaca disguised as a beggar. He tests the household's loyalty, reunites with Telemachus, competes in Penelope's bow contest, slaughters all 108 suitors, and proves his identity through the secret of their immovable olive-tree bed.",
+    keyTerms: ["Penelope", "Telemachus", "Eumaeus", "Argus", "suitors", "loom ruse", "Laertes", "contest of the bow", "axe-heads", "olive tree bed", "Eurycleia"],
+    mustKnow: [
+      "108 suitors eating through Odysseus's wealth; Antinous and Eurymachus are leaders",
+      "Penelope's ruse: weaves shroud for Laertes by day, unravels by night — ~4 years until betrayed by treacherous maid",
+      "Odysseus disguised as beggar by Athena; recognized by old dog Argus (wags tail and dies) and nurse Eurycleia (sees scar from boar hunt on his thigh)",
+      "Telemachus and Odysseus reunite secretly; plan slaughter of suitors together",
+      "Contest: Penelope offers to marry whoever strings Odysseus's great bow and shoots through 12 axe-heads in a line",
+      "No suitor can string it; beggar (Odysseus) does it easily; arrow through all 12 axe-heads; slaughters all 108 suitors",
+      "12 treacherous maidservants hanged; Melanthius (treacherous goatherd) mutilated",
+      "Penelope tests identity: orders bed moved; Odysseus outraged — their bed carved from a living olive tree rooted in the earth; immovable; only the two of them know this secret",
+      "Reunion after 20 years — Homer describes their joy as like shipwrecked mariners who see land"
+    ],
+    likelyExam: ["How does Penelope function as Odysseus's equal?", "What is the significance of the olive-tree bed test?"]
+  },
+  {
+    id: "11a", unit: 4, title: "Perseus and Bellerophon",
+    summary: "Two Argolid heroes. Perseus: classic quest myth — divine parentage, impossible task, divine helpers, magical gifts, monster-slaying, fulfilled prophecy. Bellerophon: succeeds at all tasks but is destroyed by hubris when he tries to fly to Olympus. They exemplify the contrast between humble heroism and overreach.",
+    keyTerms: ["Perseus", "Danaë", "Acrisius", "Dictys", "Polydectes", "Graiae", "Medusa", "Gorgons", "kibisis", "Andromeda", "Pegasus", "Bellerophon", "Chimaera", "Proetus", "Stheneboea", "Lobates", "Solymi", "Amazons"],
+    mustKnow: [
+      "Oracle to Acrisius: grandson will kill him → locks Danaë in bronze chamber; Zeus impregnates her as shower of gold",
+      "Perseus and Danaë set adrift in chest; rescued by Dictys ('net') on island of Seriphos",
+      "Polydectes (king) wants Danaë; schemes to remove Perseus with Gorgon's head challenge",
+      "Graiae (three ancient women, one eye/tooth shared): Perseus steals the eye to force them to reveal the nymphs",
+      "Equipment from nymphs: cap of invisibility, winged sandals, kibisis (magic pouch); from Hermes: scimitar; from Athena: polished shield as mirror",
+      "Three Gorgons: Stheno + Euryale (immortal), Medusa (mortal, pregnant by Poseidon); snakes for hair; gaze turns to stone",
+      "Beheads sleeping Medusa via shield-reflection; Pegasus + Chrysaor spring from her blood",
+      "Rescues Andromeda (chained to cliff; mother Cassiopeia boasted more beautiful than Nereids → Poseidon sends sea monster)",
+      "Turns Polydectes to stone; gives Medusa's head to Athena → becomes her aegis",
+      "Accidentally kills Acrisius at Larissa games with a discus — prophecy fulfilled despite all precautions",
+      "Bellerophon: kills brother; false accusation by Stheneboea; sent to Lobates WITH SEALED LETTER requesting his death (unknowingly carries his own death sentence)",
+      "Tasks: kills Chimaera (lion/goat/serpent) on Pegasus; defeats Solymi; defeats Amazons; survives ambush",
+      "Hubris: tries to fly Pegasus to Olympus; Zeus sends gadfly; thrown off; wanders lame, blind, and alone — mortal cannot attain divine station"
+    ],
+    likelyExam: ["Describe Perseus's quest", "Compare Perseus and Bellerophon — what does the contrast reveal?"]
+  },
+  {
+    id: "11b", unit: 4, title: "Theseus",
+    summary: "Athens's national hero — its Heracles. Dual paternity (Aegeus or Poseidon). Six labours on the road to Athens. Kills the Minotaur with Ariadne's help. Abandons Ariadne on Naxos. His forgetfulness about the sails causes Aegeus's death and names the Aegean Sea. Later story includes Phaedra.",
+    keyTerms: ["Theseus", "Aethra", "Aegeus", "Periphetes", "Sinis", "Sciron", "Cercyon", "Procrustes", "Medea", "Minotaur", "Minos", "Ariadne", "Labyrinth", "Daedalus", "Pasiphae", "Phaedra", "Hippolytus", "Hecale"],
+    mustKnow: [
+      "Dual paternity: Aethra slept with both Aegeus and Poseidon; Theseus can claim either as father",
+      "Aegeus leaves sword and sandals under rock; Theseus retrieves them in his teens; takes dangerous overland route (modeled on Heracles)",
+      "Six labours: (1) Periphetes at Epidaurus (iron club, son of Hephaestus); (2) Sinis at Corinth (bends pines, tears victims); (3) Crommyon Sow; (4) Sciron at cliff (kicks into sea/turtle); (5) Cercyon at Eleusis (wrestling champion); (6) Procrustes (iron bed, cuts/stretches victims)",
+      "In Athens: Aegeus married Medea (fled Corinth after killing her children for Jason's betrayal); Medea tries to poison Theseus; Aegeus recognizes him at last moment by sword",
+      "On way to Marathon: old woman Hecale hosts him; Theseus captures the Bull of Marathon (same bull Heracles had fetched from Crete)",
+      "Athens tribute to Minos: 7 young men + 7 young women every 9 years for the Minotaur",
+      "Minotaur origin: Minos's bull not sacrificed → Poseidon makes Pasiphae love it → Daedalus builds wooden cow → Minotaur born → Daedalus builds Labyrinth",
+      "Ariadne (Minos's daughter) falls for Theseus; gives him thread (clew) to navigate labyrinth; Theseus kills Minotaur; takes Ariadne",
+      "Abandons Ariadne sleeping on Naxos; Dionysus finds her and marries her",
+      "Forgets to change sails black→white; Aegeus sees black sails, jumps off cliff → Aegean Sea named after him",
+      "Later: marries Phaedra (Ariadne's sister); Phaedra falls for stepson Hippolytus; false accusation; Theseus curses him; Poseidon kills Hippolytus; Phaedra kills herself"
+    ],
+    likelyExam: ["Compare Theseus's labours with Heracles's", "How does Theseus's treatment of Ariadne reflect on his heroism?"]
+  },
+  {
+    id: "12a", unit: 4, title: "Heracles — Birth and Life",
+    summary: "Semi-divine son of Zeus and Alcmena. Hera's jealousy dogs him from birth. Strangles snakes as an infant. Kills wife Megara in Hera-sent madness. Penance: serve Eurystheus for twelve years. Later sold into slavery to Omphale after killing Iphitus.",
+    keyTerms: ["Heracles", "Hercules", "Alcmena", "Amphitryon", "Iphicles", "Hera", "Eurystheus", "Megara", "Iolaus", "Thespius", "Iphitus", "Omphale"],
+    mustKnow: [
+      "Zeus as Amphitryon; Alcmena bears twins: Heracles (Zeus's son) + Iphicles (mortal); Hera delays birth so Eurystheus born first",
+      "Hera sends two serpents to kill infant Heracles; he strangles both in his crib",
+      "Education: tutored by Chiron (centaur); kills music teacher Linus with lyre when struck — early sign of dangerous temper",
+      "Thespius: Heracles fathered 50+ children with Thespius's 50 daughters (some say 51 daughters, one night each or 50 nights)",
+      "Marries Megara (Creon of Thebes's daughter); has children; Hera sends madness; Heracles kills his wife and children",
+      "Oracle of Delphi: serve Eurystheus of Tiryns for 12 years as atonement/purification",
+      "Name: Heracles = 'glory of Hera' — deeply ironic; Hera is his lifelong enemy",
+      "After labours: kills Iphitus (Eurytus's son) in rage; must atone again; Apollo commands 3 years servitude to Omphale of Lydia (spins wool; she wears his lion skin)"
+    ],
+    likelyExam: ["Why is Hera hostile to Heracles?", "How does Heracles embody the ideal Greek hero?"]
+  },
+  {
+    id: "12b", unit: 4, title: "Heracles — The Twelve Labours",
+    summary: "Twelve canonical labours (athloi) for Eurystheus. First six in Peloponnese; last six at edges of the world. Each labour conquers a dimension of chaos, death, or nature. Notable episodes: Iolaus helps with Hydra, centaur Pholus/Chiron incident, wrestling Death for Alcestis, Atlas trick.",
+    keyTerms: ["Nemean Lion", "Lernaean Hydra", "Iolaus", "Cerynean Hind", "Erymanthian Boar", "Pholus", "Chiron", "Augean Stables", "Stymphalian Birds", "Cretan Bull", "Mares of Diomedes", "Admetus", "Alcestis", "Hippolyta", "Cattle of Geryon", "Hesperides", "Cerberus"],
+    mustKnow: [
+      "1. Nemean Lion: invulnerable skin; strangles it; wears skin as armor; uses its jaw",
+      "2. Lernaean Hydra: 9 heads (8 mortal + 1 immortal); cut head grows two; Iolaus burns stumps; immortal head buried under rock; poison arrows made from Hydra blood",
+      "3. Cerynean Hind: sacred to Artemis; golden horns; chases one year; Artemis appeased when Heracles blames Eurystheus",
+      "4. Erymanthian Boar: en route visits centaur Pholus (opens communal wine jar); centaurs attack; accidentally wounds immortal Chiron with poisoned arrow — Chiron suffers until he surrenders his immortality",
+      "5. Augean Stables: diverts Alpheus and Peneus rivers through stables in one day; Augeas refuses payment → Heracles kills him after labours; establishes Olympic games at Olympia",
+      "6. Stymphalian Birds: bronze beaks and claws; Athena gives bronze castanets to flush them",
+      "7. Cretan Bull: same bull that fathered Minotaur; released by Eurystheus → becomes Bull of Marathon (Theseus captures it)",
+      "8. Mares of Diomedes: man-eating horses; feeds Diomedes to them; en route stays at Pherae; WRESTLES DEATH (Thanatos) and wins Alcestis back for Admetus",
+      "9. Girdle of Hippolyta: queen of Amazons; Hera stirs trouble; Hippolyta killed; on way back saves Hesione from sea monster; Laomedon (Troy's king) refuses payment — seeds future sack of Troy by Heracles",
+      "10. Cattle of Geryon (far west): three-bodied Geryon; sets up Pillars of Heracles (Gibraltar); uses sun-cup of Helios",
+      "11. Apples of Hesperides: holds sky while Atlas fetches apples; tricks Atlas into taking sky back; gives apples to Athena who returns them",
+      "12. Cerberus: aided by Hermes and Athena; Hades grants permission without weapons; wrestles three-headed dog; terrifies Eurystheus; returns Cerberus"
+    ],
+    likelyExam: ["Name and describe any four labours", "What do the labours collectively represent?"]
+  },
+  {
+    id: "12c", unit: 4, title: "Heracles — Apotheosis (Divinization)",
+    summary: "Heracles wins Deianira from river god Achelous. Centaur Nessus's dying revenge using Heracles' own Hydra-poisoned arrow causes his death. His mortal part burns on a pyre lit by Philoctetes; his divine part ascends. Reconciles with Hera. Marries Hebe. Only mortal to achieve full godhood.",
+    keyTerms: ["Deianira", "Achelous", "cornucopia", "Nessus", "Iole", "Iphitus", "Omphale", "Trachis", "Philoctetes", "Hebe", "apotheosis"],
+    mustKnow: [
+      "Deianira: Heracles wins her by wrestling river god Achelous; breaks off one of Achelous's horns → becomes the cornucopia (horn of Amalthea, horn of plenty)",
+      "Nessus (centaur hired as ferryman): attempts to rape Deianira; Heracles shoots him with a Hydra-poisoned arrow",
+      "Dying Nessus tells Deianira: 'My blood is a love potion — use it if Heracles ever strays from you'; she believes him and collects his blood",
+      "Years later: Heracles brings Iole (daughter of Eurytus of Oechalia) as captive/concubine; Deianira fears she is losing him",
+      "Deianira soaks ceremonial robe in Nessus's blood (= Hydra venom from Heracles's arrow); sends it to Heracles thinking it's a love charm",
+      "Robe burns Heracles horribly, sticks to his skin when he tries to remove it",
+      "Heracles has himself carried to Mount Oeta; orders funeral pyre; no one will light it; finally Philoctetes (in some versions, Poeas) agrees; receives Heracles's bow and arrows — CRUCIAL: Philoctetes uses these at Troy",
+      "Fire burns mortal portion; divine part ascends to Olympus in a cloud",
+      "Reconciliation: Heracles and Hera make peace; he marries her daughter Hebe (eternal youth)",
+      "Significance: ONLY mortal in classical mythology to fully become a god; apotheosis represents the bridge between mortal and divine; extreme suffering as price of immortality",
+      "Heracles's sons (Heraclidae) later reclaim the Peloponnese — historical dimension"
+    ],
+    likelyExam: ["How does Heracles's apotheosis reflect Greek ideas about the mortal/divine boundary?", "Analyze Deianira's role in Heracles's death — is she culpable?"]
   },
 ];
 
-export const LONG_ANSWERS: LongAnswer[] = [
-  {
-    category: 'gods',
-    categoryLabel: 'Gods',
-    question: 'Describe Aphrodite\'s character and power as revealed in the Homeric Hymn to Aphrodite. What does her affair with Anchises reveal about the nature of erotic love and its limits?',
-    answer: `Aphrodite's power is presented as universal and irresistible — she conquers gods, humans, and animals alike, with only three exceptions: Athena, Artemis, and Hestia, all virgins. The hymn opens by calling upon the Muse to sing the "works of Aphrodite," framing her as an abstract force of nature rather than merely an anthropomorphic figure with human motivations. The central irony of the narrative is that Zeus, tired of Aphrodite boasting about making gods fall for mortals, turns her own power against her — she falls helplessly in love with the mortal shepherd Anchises. She disguises herself as a mortal woman to seduce him, invoking her defining trait of deception. The story reveals that even Aphrodite cannot escape her own domain: she is conquered by her own power.
-
-Their union produces Aeneas, future founder of the Roman line (as Vergil will develop in the Aeneid). The myth also explores the dangerous asymmetry between god and mortal: when Anchises wakes and realizes she is a goddess, he is terrified — because mortal men who sleep with goddesses typically come to bad ends. Aphrodite reassures him but warns he must never reveal who Aeneas's mother is. The myth thus illustrates both the all-consuming force of erotic desire and its inherent limits — the unbridgeable gap between mortal and immortal that desire alone cannot close. The hymn's irony runs deep: the statement that Aphrodite's power conquers all is immediately ratified by the fact that she cannot even resist herself.`,
-  },
-  {
-    category: 'gods',
-    categoryLabel: 'Gods',
-    question: 'Compare Athena and Ares as gods of war. What does the difference between them reveal about ancient Greek values?',
-    answer: `Athena and Ares both preside over war, but they represent radically different conceptions of it. Ares embodies destructive, brutal, and mindless warfare — he incites strife, urges furious battle, and takes pleasure in carnage. In Iliad Book 5, he is wounded by the mortal hero Diomedes fighting under Athena's guidance, and Zeus rebukes him furiously, saying he would have banished him long ago if not for the family bond. He has almost no cult significance in Greek religious practice and rarely functions as a fully developed character in mythological narratives.
-
-Athena, by contrast, represents strategic, protective, and civilizing war. She advises rather than incites; she protects cities and the warriors who defend them. When she arms herself in the Iliad, the text notes pointedly that she first makes her own robe with her own hands before putting on the armour of Zeus — a detail linking her war aspect permanently to her craft domain and feminine productivity. She is the patron of heroes who win through intelligence: Odysseus above all, but also Diomedes, Perseus, and Heracles. This contrast encodes deeply held Greek values: pure unreflective violence is ignoble and even contemptible; violence channeled through intelligence, strategy, and justice is what makes a true hero. The Romans somewhat reversed this valuation — their equivalent Mars was far more culturally significant, associated with victorious conquest, the harvest, and as the father of Romulus and Remus, the ancestor of Rome itself.`,
-  },
-  {
-    category: 'gods',
-    categoryLabel: 'Gods',
-    question: 'Describe Artemis\'s key characteristics and explain the apparent paradox of a virgin goddess associated with childbirth.',
-    answer: `Artemis is defined above all by her virginity — it is the trait most emphasized, most fiercely protected, and most violently defended when violated. She is a goddess of the wilderness and wild animals, carrying the bow and arrows that bring sudden death to women, placed as the direct female antithesis of Aphrodite throughout Greek literature. In the Homeric Hymn to Aphrodite, she appears as one of the three goddesses immune to Aphrodite's power — the others being Athena and Hestia. She is also placed in direct competition with Aphrodite in Euripides' Hippolytus, where the tragedy springs from the collision of the values each goddess represents.
-
-Yet paradoxically, Artemis is also deeply associated with childbirth and women's life transitions. The paradox is partly resolved by her mythological origin: in many accounts, Artemis is born first on Delos and immediately assists in the birth of her twin brother Apollo — she becomes a midwife goddess from her very first act of existence. In classical Athens, women dedicated offerings at her sanctuary at Brauron both before marriage (the Arkteia festival, where girls "played the bear") and after childbirth. The key myths reinforcing her virginity — Actaeon (accidentally sees her bathing; turned into a stag, killed by his own hounds), Callisto (raped by Zeus; expelled from Artemis's band), and Orion (tries to rape her; stung to death by a scorpion she raises from the earth) — all demonstrate that her chastity is a sacred boundary whose violation, even entirely accidental, demands lethal punishment. She is simultaneously a protector of young women and a terrifying enforcer of the boundary between sexuality and its absence.`,
-  },
-  {
-    category: 'heroes',
-    categoryLabel: 'Heroes',
-    question: 'Narrate the myth of Orpheus from his descent into the underworld to his death, as described by Ovid. What major themes does this myth explore?',
-    answer: `Orpheus, the legendary musician of Thrace whose entire power resided in his extraordinary musical abilities, descends into the underworld after his wife Eurydice dies from a snake bite. His music is so unparalleled that it charms Cerberus, stills the rivers of the underworld, and causes the shades of the dead to weep — even the torments of the eternally punished cease while he plays. Hades and Persephone are moved to grant him a unique concession: Eurydice may follow him back to the living world, on a single condition — he must not look back at her until both have fully emerged. He leads her upward through the darkness, but at the last possible moment, unable to bear the uncertainty and silence, he looks back. She is immediately drawn back into death, and this time there is no return.
-
-After this failure, Orpheus lives in grief in desolate places, rejecting the love of other women and in some versions turning entirely to the love of boys. In Ovid's Metamorphoses, he is eventually torn apart by a band of Maenads — the female worshippers of Dionysus — whose amorous advances he has spurned. Even his severed head continues to sing as it floats down the river Hebrus. The myth explores several profound themes simultaneously: the power of art and music as a force capable of moving even death itself; the ultimate limits of that power — his art gets him to the threshold but cannot overcome the condition imposed; the role of desire and doubt — his love is not strong enough to endure the not-knowing; and the tragic irony that the very sensitivity that gave him his power undoes him at the crucial moment. The myth also embodies Orpheus's dual divine connections: Apollo (music) and Dionysus (whose cult ultimately destroyed him).`,
-  },
-  {
-    category: 'heroes',
-    categoryLabel: 'Heroes',
-    question: 'Tell the story of Oedipus from birth to exile. What does this myth reveal about fate, free will, and the nature of Greek tragedy?',
-    answer: `Oedipus is born to Laius and Jocasta, king and queen of Thebes, under a terrible prophecy from Delphi: he will kill his father and marry his mother. To prevent this, Laius has the infant exposed on Mount Cithaeron with his ankles pinned together — hence the name Oedipus ("swollen foot"). A shepherd takes pity and passes him to the childless king and queen of Corinth, Polybus and Merope, who raise him as their own son. When Oedipus in turn consults Delphi and receives the same prophecy (which he believes applies to his adoptive parents), he flees Corinth in horror. On the road to Thebes, he kills an old man in a quarrel at a crossroads — unknowingly his true father Laius. Arriving at Thebes, he answers the Riddle of the Sphinx (What walks on four legs in the morning, two at noon, and three in the evening? Answer: Man), liberating the city. He is rewarded with the kingdom and the widowed queen Jocasta as his wife, and rules successfully for years, fathering children.
-
-When a terrible plague strikes Thebes, the Delphic oracle declares the murderer of Laius must be expelled. Oedipus investigates with absolute determination and relentless intellectual commitment — the deepest irony being that his methodical pursuit of truth leads him to discover that he himself is both the murderer and the son-husband. Jocasta kills herself; Oedipus blinds himself with her brooch and goes into exile. The myth is not fundamentally about sin but about the unbridgeable gap between human knowledge and divine foreknowledge. Oedipus does everything a rational, morally serious person could possibly do to avoid his fate — and his very acts of avoidance fulfill it. It raises irresolvable questions about whether there is any meaningful human freedom when the gods have already determined the outcome.`,
-  },
-  {
-    category: 'troy',
-    categoryLabel: 'Trojan War',
-    question: 'Explain the causes of the Trojan War, the alignment of the gods, and the most significant consequences for major characters.',
-    answer: `The Trojan War's ultimate mythological origin is the Judgment of Paris. At the wedding of the mortal hero Peleus and the sea-nymph Thetis, the goddess Eris (Discord) throws a golden apple inscribed "for the fairest" among the divine guests. Hera, Athena, and Aphrodite each claim it. Zeus, wisely unwilling to judge among them, delegates the decision to the Trojan prince Paris, who is tending his flocks on Mount Ida. Each goddess offers a bribe: Hera offers power and dominion over kingdoms; Athena offers wisdom and skill in warfare; Aphrodite offers the most beautiful woman in the world — Helen, wife of the Spartan king Menelaus. Paris chooses Aphrodite. He then visits Sparta as a guest of Menelaus, violates the sacred laws of hospitality, and abducts (or elopes with) Helen. Menelaus rallies the Greek kings under his brother Agamemnon in a great coalition to retrieve her.
-
-The gods align accordingly: Hera and Athena become implacable enemies of Troy; Aphrodite consistently protects Paris; Apollo favors the Trojans and opens the Iliad by raining plague arrows on the Greeks; Poseidon, who built Troy's walls, ironically sides with the Greeks because the Trojans refused to pay him. The war lasts ten years. The consequences are sweeping: Achilles dies from Paris's arrow guided by Apollo; Hector is killed and shamefully dragged; Troy is sacked and burned; Priam is murdered by Neoptolemus at the altar of Zeus; Agamemnon returns home only to be murdered by Clytemnestra and Aegisthus; Odysseus wanders for ten more years; but Aeneas escapes and eventually founds the line that will produce Rome, transforming the Trojan catastrophe into the seed of Western civilization.`,
-  },
-  {
-    category: 'troy',
-    categoryLabel: 'Trojan War',
-    question: 'Provide a narrative overview of the Odyssey and discuss its major themes.',
-    answer: `The Odyssey recounts the ten-year journey of Odysseus from Troy back to his home island of Ithaca, following the ten years already spent fighting the Trojan War. The poem begins in medias res: Odysseus has been detained for seven years on the island of Ogygia by the nymph Calypso, who loves him and wishes to make him immortal. In Ithaca, his wife Penelope is besieged by over a hundred suitors who assume Odysseus is dead and compete for her hand and kingdom; his son Telemachus is young and powerless. Athena, his constant divine protector, intervenes: she encourages Telemachus to seek news of his father and persuades the gods to order Calypso to release Odysseus.
-
-His earlier wanderings — recounted by Odysseus himself at the Phaeacian court — include the island of the Lotus-Eaters (whose fruit induces forgetfulness), the Cyclops Polyphemus (son of Poseidon, blinded by Odysseus, causing Poseidon's lasting wrath), the island of Aeolus (god of winds), the cannibalistic Laestrygonians, Circe's island (she transforms men to pigs; Odysseus resists with Hermes' help and stays a year), the Land of the Dead (Book 11, where he consults the shade of Tiresias and sees the heroic dead), the Sirens, Scylla and Charybdis, the island of the Sun God (his men eat the sacred cattle and are destroyed in a storm), and finally Ogygia. After the Phaeacians return him to Ithaca, he disguises himself as a beggar, tests his household's loyalty, strings his own great bow in the contest Penelope devises, kills all the suitors in the hall, and reunites with Penelope. The poem's central themes are homecoming (nostos) and its price; loyalty and its rewards over time; the cunning hero who prevails through intelligence rather than mere strength; human endurance and suffering; and the complex, often manipulative relationship between gods and mortals.`,
-  },
-  {
-    category: 'thebes',
-    categoryLabel: 'Theban Saga',
-    question: 'Describe the story of the House of Thebes from Cadmus to Oedipus. What recurring themes run through this saga?',
-    answer: `The Theban saga begins with Cadmus, a Phoenician prince who is sent to search for his sister Europa (abducted by Zeus as a bull and taken to Crete). The Delphic oracle tells him to abandon the search and instead follow a cow, founding a city wherever it lies down — in Boeotia, on the Greek mainland. He kills a dragon sacred to Ares guarding a sacred spring, sows its teeth, and from the earth spring the Spartoi ("sown men") — armed warriors who fight each other until five survive. These five become the ancestors of Thebes's noble families. Cadmus marries Harmonia, daughter of Ares and Aphrodite, in a ceremony attended by the Olympian gods — one of the few such divine honors granted to a mortal.
-
-His descendants suffer a cascade of divine punishments. His daughter Semele, impregnated by Zeus, is destroyed when tricked by Hera into demanding Zeus appear in his full divine form. Another daughter Agave, in a Dionysiac frenzy, tears apart her own son Pentheus who had forbidden Dionysus's worship (Euripides' Bacchae). The house continues through Labdacus to Laius, who is warned by Delphi that his son will kill him. He and Jocasta expose the infant Oedipus, who survives, fulfills the prophecy unknowingly, answers the Sphinx's riddle, rules Thebes, and then discovers in horror the truth of his actions. He blinds himself and goes into exile. His sons Eteocles and Polynices fight over the throne, both dying in single combat in the war of the Seven Against Thebes; their sons, the Epigoni, successfully sack the city in the next generation. The saga is unified by the themes of inherited guilt and the inescapability of divine curses across generations; of human attempts to circumvent fate that only fulfill it; and of knowledge — specifically the gap between what humans know and what the gods know.`,
-  },
-  {
-    category: 'underworld',
-    categoryLabel: 'Underworld',
-    question: 'Compare the portrayal of the underworld in Homer\'s Odyssey, Vergil\'s Aeneid, and Plato\'s Myth of Er. What do the differences reveal?',
-    answer: `In Homer's Odyssey Book 11, the underworld is a place of grim uniformity and moral indifference. The dead are pale, strengthless shades who lack even consciousness until they drink blood. Most are simply present — not punished, not rewarded, simply persisting in a grey and purposeless existence. There is no moral economy to Homeric death: ordinary people simply continue in a diminished form. Only a handful of famous sinners (Tantalus, Sisyphus, Tityos) are visibly punished, and their crimes were directed against the gods themselves, not against other humans. A few outstanding heroes inhabit Elysium. The overall impression is deeply bleak: death is the loss of everything that makes life meaningful, and virtue in life earns no special reward beyond it.
-
-Vergil's Aeneid Book 6 transforms this into a much more structured moral landscape. There is a clearly delineated Tartarus for the wicked, Elysium for the heroic and virtuous, and — crucially and innovatively — the plain of Lethe where souls await reincarnation after a thousand years. The underworld serves an explicitly political purpose: Anchises shows Aeneas the parade of future Roman heroes, converting the entire descent into a prophecy of Roman imperial greatness. The moral categories are sharper and more systematic than in Homer; the punishments are more varied and more richly imagined.
-
-Plato's Myth of Er (Republic Book 10) is the most morally systematic of all: souls are judged after death, punished or rewarded for precisely ten times the good or evil they did in life (a period of one thousand years), and then choose their next lives. The greatest criminals — especially tyrants — receive the most terrible punishment. The myth is explicitly philosophical, written to argue that living justly is necessary because death brings absolute moral accountability. Taken together, the progression from Homer to Vergil to Plato traces an evolution from amoral persistence, through moral differentiation in service of Roman ideology, to a fully rationalized philosophical system of cosmic justice.`,
-  },
-  {
-    category: 'theory',
-    categoryLabel: 'Theory',
-    question: 'Explain and critically evaluate three different theoretical approaches to interpreting myth, using specific examples from Greco-Roman mythology in each case.',
-    answer: `Three of the most important theoretical frameworks for interpreting myth are the etiological approach, the psychoanalytic approach, and structuralism, each of which illuminates different dimensions of the myths we study while leaving others in shadow.
-
-The etiological approach (from Greek aitia, "cause") reads myths as explanations of origins — physical, social, or ritual. A clear example is the Homeric Hymn to Demeter: the story of Demeter's grief-stricken search for Persephone and her temporary withdrawal from the world explains both the existence of the seasons and the founding of the Eleusinian Mysteries. Apollo's killing of the serpent Python at Delphi explains why the oracle is called the Pythian oracle and why the priestess is the Pythia. The strength of this approach is that it grounds myth in historically real religious practice; its weakness is that many myths have no clear etiological function whatsoever and cannot be explained this way.
-
-The psychoanalytic approach, developed by Freud and extended by Jung, reads myth as the expression of deep psychological needs and structures. Freud's Oedipus complex is named directly after the Greek myth — the story of a man who unknowingly kills his father and marries his mother expresses, according to Freud, repressed desires that all humans carry. Jung's concept of the collective unconscious suggests that recurring mythic images — the hero, the great mother, the trickster, the shadow — are archetypes reflecting universal patterns in human psychology that surface independently across unrelated cultures. This can explain the remarkable cross-cultural parallels (Hesiod's succession myth and the Hurrian Kumarbi myth, for instance). Its weakness, identified by Malinowski, is over-generalization: it cannot account for the specific cultural meanings and social functions myths serve in particular communities.
-
-Structuralism, developed most famously by Lévi-Strauss, argues that myths are a mechanism for mediating fundamental binary oppositions in human thought: raw versus cooked, nature versus culture, mortal versus immortal, male versus female. In Hesiod's Theogony one can read the entire narrative as a movement from female-dominated primordial power (Gaia, Rhea) to male-dominated civic order (Zeus's rule through law and cunning), with Zeus ultimately incorporating feminine wisdom by literally swallowing Metis. The approach is useful for identifying universal structures but has been criticized for imposing the analyst's own cultural binary categories onto ancient texts.`,
-  },
-  {
-    category: 'theory',
-    categoryLabel: 'Theory',
-    question: 'What is myth? Discuss the difficulties of defining it using examples from the course, and explain the three modern categories of Greco-Roman myth.',
-    answer: `The English word "myth" derives from the Greek mythos, meaning simply word, speech, tale, or story — a definition so broad it encompasses almost all verbal communication, and therefore too broad to be analytically useful. There is no universally accepted scholarly definition of myth, and this fact is itself significant: it reveals that myth is not a fixed genre but a culturally embedded and functionally diverse form of human expression. One useful working definition is that myths are stories (transmitted through text, art, music, dance, film, or oral performance) that express certain universal or communal truths about human nature, the cosmos, and existence — truths that may not be empirically verifiable but that speak to deeply felt aspects of experience.
-
-This contrasts with the common misconception that myths are simply fantastical stories that are "not true." The Greeks and Romans did not easily separate historical truth from mythological truth — Homer's audiences likely believed the Trojan War happened roughly as described, and many ancient sources treat the genealogies of gods and heroes as genuine history. On a deeper level, even clearly fantastical elements of myth — Eros shooting arrows to cause love — express something genuinely and universally experienced: the irrational, involuntary, overwhelming power of desire. The fantastic vehicle carries a true cargo.
-
-Modern scholars typically divide Greco-Roman myths into three overlapping categories: Myth Proper (stories dealing primarily with the gods and humans' relationship to them — the Homeric Hymns are the clearest examples); Saga or Legend (stories with at least a perceived connection to real historical events or places — the Theban saga, the Trojan War, which likely derives from a real Late Bronze Age conflict at the site of Troy); and Folktale (tales of fantastical adventure featuring heroes or heroines — the Labors of Heracles). Homer's Iliad is simultaneously all three. The boundaries between these categories are porous and the categories themselves overlap constantly, but they provide a useful starting framework for analysis.`,
-  },
+export const flashcards = [
+  { id:1, unit:1, front:"What is a myth?", back:"A traditional story of sacred/collective importance involving supernatural beings. Explains origins, natural phenomena, or human experience. Distinguished from legend (historical basis) and folktale (entertainment purposes)." },
+  { id:2, unit:1, front:"Euhemerism", back:"Theory that gods were originally great historical humans later deified (Euhemerus, 4th c. BCE). Example: Heracles may have been a real powerful king before being worshipped as divine." },
+  { id:3, unit:1, front:"Freud's contribution to myth theory", back:"The Oedipus complex: unconscious desire of son for mother, rivalry with father. Freud named it directly after the Oedipus myth. Myths reveal repressed desires the conscious mind cannot directly express." },
+  { id:4, unit:1, front:"Jung's archetypes", back:"Universal symbolic figures in the collective unconscious: Hero, Shadow, Anima/Animus, Great Mother, Trickster, Wise Old Man. Myths give form to these universal human patterns across all cultures." },
+  { id:5, unit:1, front:"Functionalism (Malinowski)", back:"Myths serve social functions: reinforce moral codes, validate rituals, justify existing social structures. Myth as 'social charter' — myths legitimize how things are." },
+  { id:6, unit:1, front:"Structuralism (Lévi-Strauss)", back:"Myths express underlying binary oppositions (nature/culture, life/death, raw/cooked) that reflect universal structures of human thought. Meaning lies in the structural relationships between elements, not the narrative itself." },
+  { id:7, unit:1, front:"Aetiological myth — define and give an example", back:"A myth that explains the origin of something natural or cultural. Examples: Demeter/Persephone explains the seasons; Arachne explains why spiders weave; Actaeon explains why hunters respect Artemis." },
+  { id:8, unit:1, front:"12 Olympians — name them all", back:"Zeus, Hera, Poseidon, Demeter, Athena, Apollo, Artemis, Ares, Aphrodite, Hephaestus, Hermes, Dionysus. (Sometimes Hestia replaces Dionysus.)" },
+  { id:9, unit:1, front:"Hubris — define and give examples", back:"Excessive pride or arrogance toward the gods, overstepping one's mortal station. Always punished in Greek myth. Examples: Niobe (boasts over Leto → children killed), Arachne (weaving contest → spider), Bellerophon (tries to reach Olympus → falls), Pentheus (denies Dionysus → torn apart)." },
+  { id:10, unit:1, front:"Oracle at Delphi — who, what, how", back:"Apollo's sanctuary on Mount Parnassus at Delphi. The Pythia (priestess) sat over a volcanic fissure, inhaled vapors, and spoke Apollo's words. Most important oracle in the Greek world — consulted before wars, colonization, and major political decisions." },
+  { id:11, unit:2, front:"Creation order in Hesiod's Theogony", back:"Chaos → Gaia (Earth) + Tartarus + Eros emerge. Gaia produces Uranus (Sky). Uranus + Gaia = Titans, Cyclopes (one-eyed), Hecatonchires (hundred-handed). Titans include Cronus and Rhea, parents of the Olympians." },
+  { id:12, unit:2, front:"Five Ages of Man — all five in order", back:"Gold (Cronus rules; peaceful, no toil, no death) → Silver (impious, shorter lives) → Bronze (violent warriors, died in war) → Heroic (demigods; Troy and Thebes) → Iron (Hesiod's present; toil, injustice, moral decline — will end when babies are born gray)." },
+  { id:13, unit:2, front:"Why is Prometheus punished?", back:"Two crimes: (1) Tricks Zeus at Mecone — wraps bones/fat for gods, hides meat for humans. (2) Steals fire from Olympus in a fennel stalk and gives it to humans. Zeus chains him to a rock; eagle eats his liver daily (it regenerates each night). Later freed by Heracles." },
+  { id:14, unit:2, front:"Pandora's jar — contents and significance", back:"Pandora opens the jar (pithos — actually a large storage jar, not a 'box') releasing all evils, diseases, and sufferings into the world. Only Elpis (Hope) remains inside when she closes it. Her curiosity mirrors the earlier opening of the human condition by Prometheus's theft." },
+  { id:15, unit:2, front:"Apollo's domains — list all", back:"Prophecy and the Oracle at Delphi; music and poetry; sun/light; healing AND plague (can send or cure disease); archery; rationality and order. Twin of Artemis; son of Zeus and Leto; born on Delos." },
+  { id:16, unit:2, front:"How was Aphrodite born?", back:"From the sea-foam (aphros) that gathered around the severed genitals of Uranus, thrown into the sea by his son Cronus. She drifted to shore near Cyprus or Cythera, fully grown and radiantly beautiful." },
+  { id:17, unit:2, front:"Athena's birth", back:"Zeus swallowed the Titaness Metis (wisdom) because of a prophecy that her child would surpass its father. Athena gestated in his head. Hephaestus split Zeus's skull with an axe; Athena sprang out fully grown and fully armed with a war-shout." },
+  { id:18, unit:2, front:"Why do seasons exist? (Demeter myth)", back:"Persephone ate pomegranate seeds in the underworld (6 seeds = 6 months bound there). When Persephone is with Hades, Demeter mourns and withholds her gifts — autumn and winter. When Persephone returns, Demeter rejoices — spring and summer." },
+  { id:19, unit:2, front:"Eleusinian Mysteries — what, who, why", back:"Secret initiatory rites at Eleusis honouring Demeter and Persephone. Established after Demeter's wandering. Promised initiates a blessed afterlife different from the gloomy Homeric Hades. Practiced for ~2,000 years. Content was never revealed — initiates sworn to secrecy on pain of death." },
+  { id:20, unit:2, front:"Dionysus's 'twice-born' origin", back:"Mother Semele was burned to ash when Zeus revealed his true divine form (Hera tricked her). Zeus sewed the unborn fetus Dionysus into his own thigh and carried him to term — his 'second birth' from Zeus's thigh gives him the epithet 'twice-born.'" },
+  { id:21, unit:2, front:"What happens to Pentheus in the Bacchae?", back:"He denies Dionysus's divinity. Dionysus (in disguise) manipulates Pentheus's own repressed fascination with the Maenads, convincing him to dress as a woman to spy on them on Mount Cithaeron. The Maenads — led by his own mother Agave — spot him and tear him apart (sparagmos), believing him a mountain lion." },
+  { id:22, unit:2, front:"Arachne myth — story and meaning", back:"Lydian mortal Arachne boasts her weaving surpasses Athena. Contest: Arachne's tapestry perfectly depicts the gods' crimes/love affairs. Athena destroys it. Arachne hangs herself; Athena transforms her into a spider. Classic hubris: mortal's excellence that challenges the divine is punished even if the mortal wins." },
+  { id:23, unit:2, front:"Niobe myth — story and meaning", back:"Queen Niobe of Thebes boasts that her 14 children (7 sons + 7 daughters) surpass Leto, who has only two (Apollo and Artemis). Apollo kills all 7 sons; Artemis kills all 7 daughters. Niobe weeps herself into a rock. Paradigm case of hubris: claiming superiority over divine offspring." },
+  { id:24, unit:3, front:"Greek underworld vs. Christian Hell — key difference", back:"The Greek underworld (Hades) receives ALL mortals regardless of conduct — not just sinners. Most end up in the neutral, joyless Asphodel Fields. Only a tiny number go to Tartarus (for offending gods) or Elysium (exceptional heroes). It is NOT a moral judgment system — unlike the Christian Hell." },
+  { id:25, unit:3, front:"Five rivers of the Underworld", back:"Styx (boundary; oaths of the gods), Lethe (forgetfulness — souls drink before reincarnation), Acheron (woe; Charon's ferry), Phlegethon (fire), Cocytus (lamentation/wailing)." },
+  { id:26, unit:3, front:"Why does Orpheus fail to retrieve Eurydice?", back:"Hades's single condition: lead Eurydice out WITHOUT looking back. At the very threshold of the upper world, Orpheus looked back — from love, doubt, or impatience. Eurydice was immediately pulled back into death. Hades would not negotiate a second time." },
+  { id:27, unit:3, front:"Achilles on death — Odyssey Book 11 (exact sentiment)", back:"'I'd rather slave on earth for a dirt-poor tenant farmer who scrapes to keep alive than rule over all the breathless dead.' Complete reversal of his Iliad choice of glory over long life — in death he regrets his decision." },
+  { id:28, unit:3, front:"Plato's Myth of Er — three key points", back:"(1) Souls judged after death: punished or rewarded 10× for each wrong or good done during life, over 1,000 years. (2) They choose their next life from a selection — choice is free but shaped by previous habits. (3) They drink from the River Lethe, forget everything, and are reborn. Only true philosophers can eventually escape the cycle." },
+  { id:29, unit:3, front:"Why does Aeneas carry the golden bough?", back:"To enter the underworld as a living man, Aeneas must carry the golden bough — sacred to Persephone. It signals divine permission and allows him to cross the Acheron with Charon's cooperation. Without it, no living person may cross." },
+  { id:30, unit:3, front:"Dido in Aeneid Book 6 — significance", back:"Dido (former queen of Carthage, abandoned by Aeneas, suicide) appears in the Fields of Mourning among those who died of unrequited love. When Aeneas speaks to her, she turns away in absolute silence — refusing him any acknowledgment. Her silence is a devastating moral indictment of his abandonment." },
+  { id:31, unit:3, front:"Sphinx's riddle — question and answer", back:"Question: 'What walks on four legs in the morning, two at noon, and three in the evening?' Answer: Man — who crawls on all fours as a baby, walks upright as an adult, and uses a staff (three 'legs') in old age. Oedipus answers correctly; the Sphinx destroys herself." },
+  { id:32, unit:3, front:"Oedipus — the prophecy fulfilled despite every precaution", back:"Oracle to Laius: his son will kill him. Oedipus exposed, raised in Corinth. Oedipus hears same prophecy at Delphi — flees Corinth. At the crossroads he unknowingly kills Laius. Marries widowed queen Jocasta (his mother). Prophecy completely fulfilled — ironically made possible by the very efforts to prevent it." },
+  { id:33, unit:3, front:"Cassandra's curse — cause and consequence", back:"Apollo loved Cassandra (Trojan princess). She refused him. He cursed her: she will always speak the truth but never be believed. She foresaw the Trojan Horse trick, Troy's fall, and her own death — no one listened. Killed by Clytemnestra alongside Agamemnon." },
+  { id:34, unit:3, front:"Curse of the House of Atreus — full chain", back:"Tantalus (serves Pelops to gods → Tartarus) → Pelops (curses dying charioteer Myrtilus) → Atreus (feeds Thyestes his own children) → Agamemnon (sacrifices Iphigenia) → Clytemnestra + Aegisthus (murder Agamemnon) → Orestes (kills Clytemnestra) → trial at Athens — Athena acquits him; cycle ends." },
+  { id:35, unit:3, front:"Judgment of Paris — full story", back:"At the wedding of Peleus and Thetis, Eris (Strife, not invited) throws a golden apple 'for the most beautiful.' Hera, Athena, Aphrodite compete. Zeus refuses to judge; appoints Paris (Trojan prince, raised by shepherd). Each bribes him: Hera (power), Athena (victory), Aphrodite (most beautiful woman = Helen). Paris chooses Aphrodite → takes Helen → Trojan War." },
+  { id:36, unit:3, front:"Why does Achilles withdraw from the Trojan War?", back:"Agamemnon was forced to return his war-prize Chryseis (daughter of Apollo's priest Chryses) to stop a plague. He compensated himself by taking Achilles's war-prize Briseis. Achilles felt publicly dishonored — robbed of the tangible symbol of his worth. He withdrew from battle and asked his mother Thetis to make the Greeks suffer." },
+  { id:37, unit:3, front:"Dactylic hexameter — what is it?", back:"The metrical form of Homer's Iliad and Odyssey. Each line has six 'feet,' mainly dactyls (one long syllable followed by two short syllables). The oldest known form of Greek poetry. Its regular rhythm made long poems easier to memorize and perform orally — essential for the pre-literate oral tradition." },
+  { id:38, unit:4, front:"Odysseus's complete trick against Polyphemus", back:"(1) Used Maron's potent wine to get the Cyclops drunk. (2) Introduced himself as 'Nobody' (Outis in Greek). (3) Sharpened a great stake, heated it in the fire, drove it into Polyphemus's eye while he slept. (4) Strapped men under the sheep's bellies to escape. FATAL ERROR: (5) Shouted his real name and address as they sailed away — enabling Polyphemus to name him to Poseidon." },
+  { id:39, unit:4, front:"Why do all of Odysseus's men die?", back:"They ate the sacred Cattle of Helios (the Sun) on the island of Thrinakia, despite explicit warnings from BOTH Tiresias (in the underworld) and Circe. Odysseus was asleep. Zeus punished them by destroying their ship with a thunderbolt. Odysseus alone survived by clinging to wreckage." },
+  { id:40, unit:4, front:"Penelope's loom ruse — exact details", back:"She promised to choose a new husband once she had finished weaving a burial shroud for Laertes (Odysseus's elderly father). She wove it by day and secretly unraveled it each night. The deception lasted approximately four years before a treacherous maidservant exposed it." },
+  { id:41, unit:4, front:"How does Penelope verify Odysseus's identity?", back:"She tells a servant to move their marriage bed out of the bedroom. Odysseus responds with outrage — the bed cannot be moved. He built it himself from a living olive tree still rooted in the ground; one bedpost IS the living tree. Only Odysseus and Penelope know this. The secret proves his identity." },
+  { id:42, unit:4, front:"Perseus's method for beheading Medusa", back:"Used Athena's polished bronze shield as a mirror, looking only at Medusa's reflection (not directly at her petrifying gaze). Approached while she slept. Decapitated her with the scimitar given by Hermes. Placed the head in the kibisis (magic pouch) without looking at it directly." },
+  { id:43, unit:4, front:"What is born from Medusa's blood?", back:"Pegasus (the winged horse) and Chrysaor (a warrior or golden giant) spring from her severed neck. Medusa had been impregnated by Poseidon; her death releases them." },
+  { id:44, unit:4, front:"Bellerophon's sealed letter — significance", back:"Proetus sends Bellerophon to his father-in-law Lobates in Lycia with a sealed letter requesting Lobates to kill the bearer. Bellerophon unknowingly carries his own death warrant. A recurring folktale motif (parallels: Hamlet, Uriah's letter in the Bible)." },
+  { id:45, unit:4, front:"Theseus's six labours on road to Athens — all six", back:"(1) Periphetes at Epidaurus — iron club, son of Hephaestus. (2) Sinis at Corinth — 'pine-bender,' tears victims between trees. (3) Crommyon Sow — giant wild boar. (4) Sciron at coastal cliffs — kicks travelers into sea to be eaten by giant turtle. (5) Cercyon at Eleusis — wrestling champion. (6) Procrustes between Eleusis and Athens — iron bed, cuts or stretches victims." },
+  { id:46, unit:4, front:"How was the Aegean Sea named?", back:"Theseus promised his father Aegeus to change his ship's sails from black (death/failure) to white (victory) if he survived the Minotaur. In the excitement of returning, Theseus forgot to change the sails. Aegeus, watching from the cliffs of Athens for the returning ship, saw black sails and threw himself into the sea believing his son was dead." },
+  { id:47, unit:4, front:"Heracles's 12 Labours — all 12 in order", back:"1. Nemean Lion, 2. Lernaean Hydra, 3. Cerynean Hind, 4. Erymanthian Boar, 5. Augean Stables, 6. Stymphalian Birds, 7. Cretan Bull, 8. Mares of Diomedes, 9. Girdle of Hippolyta, 10. Cattle of Geryon, 11. Apples of the Hesperides, 12. Cerberus." },
+  { id:48, unit:4, front:"Lernaean Hydra — critical exam details", back:"9 heads: 8 mortal + 1 immortal. Cut a mortal head → two grow back. Solution: Iolaus (nephew) burns each stump immediately to prevent regrowth. Immortal head buried under a rock. Heracles dips his arrows in the Hydra's poison — these poisoned arrows become his signature weapon used throughout the rest of the labours and his life (and eventually cause his death via Nessus)." },
+  { id:49, unit:4, front:"What happens during the Erymanthian Boar labour?", back:"En route, Heracles visits the centaur Pholus, who opens a communal wine jar. The smell attracts other centaurs who attack. During the battle, Heracles accidentally wounds the wise immortal centaur Chiron (Achilles's future tutor) with a Hydra-poisoned arrow. Chiron suffers unbearably until he voluntarily surrenders his immortality — a tragic casualty of Heracles's collateral damage." },
+  { id:50, unit:4, front:"Heracles physically wrestles Death — during which labour?", back:"During Labour 8 (Mares of Diomedes), en route Heracles stops at Pherae. Death (Thanatos) comes for Queen Alcestis, who had agreed to die in her husband Admetus's place. Heracles waits at her tomb and physically wrestles Thanatos, winning Alcestis back. A literal conquest of death that foreshadows his own eventual transcendence of mortality." },
+  { id:51, unit:4, front:"How does Heracles die?", back:"Centaur Nessus's 'love potion' was actually Hydra venom from Heracles's own poisoned arrow. Deianira innocently soaked Heracles's ceremonial robe in it. The robe burned Heracles terribly and adhered to his skin. He built his own funeral pyre on Mount Oeta; only Philoctetes (who then received Heracles's bow and arrows, used crucially at Troy) would light it." },
+  { id:52, unit:4, front:"Heracles's apotheosis — full significance", back:"Only mortal in classical antiquity to fully achieve complete divinity. His mortal portion is consumed by the pyre; his divine portion ascends to Olympus. He reconciles with Hera (his lifelong enemy) and marries her daughter Hebe (eternal youth). Represents: extreme suffering as the price of immortality; the bridge between mortal and divine; uniquely, a human who earned godhood." },
 ];
 
-export const GODS_TABLE: God[] = [
-  { greek: 'Zeus', roman: 'Jupiter', domain: 'Sky, storm, thunder, victory, justice, prophecy', symbols: 'Thunderbolt, eagle, oak tree, scales', myths: 'Succession myths; Danae, Europa, Io, Ganymede; Judgment of Paris (delegated)', color: 'gold' },
-  { greek: 'Hera', roman: 'Juno', domain: 'Marriage, queens, jealousy, childbirth', symbols: 'Peacock, cow, pomegranate, sceptre', myths: 'Jealous pursuit of Zeus\'s lovers (Io, Callisto); supports Greeks throughout Trojan War', color: 'terra' },
-  { greek: 'Poseidon', roman: 'Neptune', domain: 'Sea, earthquakes, horses', symbols: 'Trident, horse, bull, dolphin', myths: "Blinded Cyclops's father; built Troy's walls; supports Greeks; father of Polyphemus", color: 'slate' },
-  { greek: 'Demeter', roman: 'Ceres', domain: 'Grain, agriculture, fertility, seasons, Mysteries', symbols: 'Wheat sheaf, torch, poppy', myths: 'Search for Persephone; founding of Eleusinian Mysteries; linked to ending cannibalism', color: 'olive' },
-  { greek: 'Apollo', roman: 'Apollo', domain: 'Sun, prophecy, music, healing, purification, youth, archery', symbols: 'Lyre, laurel, bow and arrow, silver bow', myths: 'Daphne; Hyacinthus; Coronis/Asclepius; Marsyas; Marpessa; Cyrene; founded Delphi', color: 'gold' },
-  { greek: 'Artemis', roman: 'Diana', domain: 'Wilderness, hunting, moon, virginity, childbirth, sudden death', symbols: 'Bow and arrow, deer, crescent moon, hunting dog', myths: 'Actaeon; Niobe; Callisto; Orion; Arethusa; Brauron/Arkteia festival', color: 'olive' },
-  { greek: 'Athena', roman: 'Minerva', domain: 'Wisdom, strategic war, craft, civilization, cities', symbols: 'Helmet, spear, aegis (Gorgon shield), owl, olive tree', myths: 'Born from Zeus\'s head; Arachne; Tiresias; Trojan Horse; patron of Odysseus and Athens', color: 'slate' },
-  { greek: 'Aphrodite', roman: 'Venus', domain: 'Erotic love, procreation, beauty, desire, seduction', symbols: 'Dove, sparrow, rose, myrtle, seashell', myths: 'Anchises/Aeneas; Adonis; Pygmalion/Galatea; Hippolytus; Paris and Helen', color: 'terra' },
-  { greek: 'Ares', roman: 'Mars', domain: 'War (destructive, brutal); Mars also: crops, harvest, Rome', symbols: 'Spear, helmet, vulture, dog', myths: 'Wounded by Diomedes in Iliad; lover of Aphrodite; almost no myth role. Mars: father of Romulus', color: 'terra' },
-  { greek: 'Hephaestus', roman: 'Vulcan', domain: 'Fire, the forge, craftsmanship, technology', symbols: 'Hammer, anvil, tongs, forge, fire', myths: "Made Achilles' armour; trapped Ares & Aphrodite in golden net; built Olympus's palaces", color: 'gold' },
-  { greek: 'Hermes', roman: 'Mercury', domain: 'Messenger, travel, thieves, commerce, psychopompos (guide of souls)', symbols: 'Winged sandals, caduceus, petasos hat, golden wand', myths: "Psychopompos; stole Apollo's cattle as infant; guide Odysseus; Homeric Hymn to Hermes", color: 'slate' },
-  { greek: 'Dionysus', roman: 'Bacchus', domain: 'Wine, theatre, ecstasy, madness, fertility, liberation', symbols: 'Grapevine, thyrsus, leopard, ivy, drinking cup', myths: 'Twice-born; Pentheus and Bacchae (Euripides); associated with Orpheus', color: 'terra' },
-  { greek: 'Hades', roman: 'Pluto / Dis', domain: 'Underworld, rule of the dead, wealth (plutos = wealth)', symbols: 'Helm of invisibility, two-pronged staff, Cerberus, cypress', myths: 'Abduction of Persephone; Sisyphus tricks; Orpheus visits; Psyche delivers Persephone\'s box', color: 'slate' },
-  { greek: 'Persephone', roman: 'Proserpina', domain: 'Queen of underworld, spring growth, grain', symbols: 'Pomegranate, sheaf of wheat, torch', myths: 'Abducted by Hades; explains the seasons; receives and guards Psyche\'s box of beauty', color: 'olive' },
-  { greek: 'Eros', roman: 'Cupid', domain: 'Love (primordial force in Hesiod; mischievous son of Venus in later myth)', symbols: 'Bow, arrows (gold = love / lead = repulsion), wings', myths: 'Daphne (strikes Apollo); Psyche; appears as cosmic force in Hesiod\'s Theogony', color: 'terra' },
-  { greek: 'Kronos', roman: 'Saturn', domain: 'Time (later), Titans, agriculture', symbols: 'Sickle, hourglass (later Roman), grain', myths: 'Castrated Ouranos; swallowed his children; defeated by Zeus; Second Succession Myth', color: 'gold' },
-  { greek: 'Prometheus', roman: '(no direct equiv.)', domain: 'Fire, technology, benefactor of humanity', symbols: 'Fire, fennel stalk, chains, eagle', myths: 'Tricked Zeus at sacrifice; stole fire for humanity; Pandora created as punishment', color: 'olive' },
+export const quizQuestions = [
+  { id:1, unit:1, question:"Which theorist named the 'Oedipus complex' after the Greek myth?", options:["Carl Jung","Claude Lévi-Strauss","Sigmund Freud","Bronisław Malinowski"], answer:2 },
+  { id:2, unit:1, question:"Euhemerism proposes that:", options:["Myths encode philosophical allegories","Gods were originally great historical humans later deified","Myths express binary oppositions","Myths serve social functions"], answer:1 },
+  { id:3, unit:1, question:"What is an aetiological myth?", options:["A myth about heroic deeds","A myth explaining the origin of something natural or cultural","A myth performed in theatre","A myth about the underworld"], answer:1 },
+  { id:4, unit:1, question:"The Oracle at Delphi was sacred to which god?", options:["Zeus","Hermes","Apollo","Athena"], answer:2 },
+  { id:5, unit:1, question:"Malinowski's functionalism holds that myths:", options:["Reveal repressed desires","Express universal archetypes","Reinforce social norms and validate rituals","Are distorted historical records"], answer:2 },
+  { id:6, unit:2, question:"In Hesiod's Theogony, what emerged first from the void?", options:["Gaia","Eros","Tartarus","Chaos"], answer:3 },
+  { id:7, unit:2, question:"How was Aphrodite born?", options:["From Zeus's head","From sea-foam around Uranus's severed genitals","Born of Hera alone","From a golden egg"], answer:1 },
+  { id:8, unit:2, question:"What remained inside Pandora's jar after she opened it?", options:["Love","Death","Hope (Elpis)","Wisdom"], answer:2 },
+  { id:9, unit:2, question:"Why must Persephone return to the underworld each year?", options:["Hades legally owns her","She ate pomegranate seeds in the underworld","Zeus commanded an equal division","She chose to stay"], answer:1 },
+  { id:10, unit:2, question:"Pentheus is killed by:", options:["Dionysus directly","Maenads led by his own mother Agave","The Furies","A divine thunderbolt"], answer:1 },
+  { id:11, unit:2, question:"How is Dionysus 'twice-born'?", options:["Born in two cities","Semele died; Zeus sewed fetus into his thigh until birth","Died and was resurrected","Born mortal then reborn divine"], answer:1 },
+  { id:12, unit:2, question:"Arachne's myth illustrates:", options:["The power of craftsmanship","The danger of boasting superiority over a god (hubris)","The origin of weaving as a craft","Athena's generosity to humans"], answer:1 },
+  { id:13, unit:2, question:"What is Prometheus's FIRST trick against Zeus (before the fire theft)?", options:["Creating Pandora","Hiding humans from the gods","Dividing the sacrificial ox so gods get bones/fat and humans get meat","Teaching humans to sacrifice animals"], answer:2 },
+  { id:14, unit:3, question:"In the Greek underworld, where do most ordinary people end up?", options:["Tartarus","Elysium","Asphodel Fields","Isle of the Blessed"], answer:2 },
+  { id:15, unit:3, question:"Why does Orpheus fail to bring Eurydice back?", options:["He sang out of tune","He looked back at her before fully leaving the underworld","Hades changed his mind","Eurydice refused to leave"], answer:1 },
+  { id:16, unit:3, question:"What does Achilles say about death in Odyssey Book 11?", options:["He is content to rule the dead","He'd rather be a dirt-poor slave on earth than rule all the dead","Death was worth it for eternal glory","He regrets fighting at Troy at all"], answer:1 },
+  { id:17, unit:3, question:"In Virgil's Aeneid 6, why must unburied souls wait at the Acheron?", options:["Hades refuses all newcomers","Charon will not ferry the unburied — they wait 100 years","They must be judged first","They must pay a greater toll"], answer:1 },
+  { id:18, unit:3, question:"In Plato's Myth of Er, what do souls drink immediately before reincarnation?", options:["Ambrosia to purify their sins","From the River Lethe (forgetfulness)","Water from the Styx to bind them to their new life","Nectar from Elysium"], answer:1 },
+  { id:19, unit:3, question:"Oedipus's answer to the Sphinx's riddle was:", options:["A god","Time itself","Man","A snake"], answer:2 },
+  { id:20, unit:3, question:"Who murders Agamemnon on his return from Troy?", options:["Aegisthus alone","Clytemnestra with Aegisthus's help","Orestes and Electra","The Furies"], answer:1 },
+  { id:21, unit:3, question:"What is Cassandra's curse?", options:["She sees only disasters","She always speaks the truth but is never believed","She is invisible to the gods","She cannot leave Troy"], answer:1 },
+  { id:22, unit:3, question:"The Judgment of Paris was triggered by:", options:["A beauty contest decreed by Zeus","Eris throwing a golden apple 'for the most beautiful' at Peleus and Thetis's wedding","Aphrodite challenging Hera and Athena directly","The Trojan council voting on alliances"], answer:1 },
+  { id:23, unit:3, question:"Dactylic hexameter is:", options:["A type of Greek shield","The meter of Homer's epics (six feet per line, mainly long-short-short)","A chariot-racing formation","A sacred musical instrument"], answer:1 },
+  { id:24, unit:3, question:"Why did Achilles withdraw from the Trojan War?", options:["He was wounded in battle","Agamemnon took his war-prize Briseis as compensation for returning Chryseis","Zeus commanded him to stop fighting","He received a prophecy of imminent death"], answer:1 },
+  { id:25, unit:4, question:"What is Odysseus's fatal mistake with Polyphemus?", options:["He went inside the cave out of curiosity","He got the Cyclops drunk","After escaping, he shouted his real name — alerting Poseidon's son","He left men behind in the cave"], answer:2 },
+  { id:26, unit:4, question:"Why does Odysseus lose all his companions?", options:["Killed by Polyphemus","They ate the sacred Cattle of Helios — Zeus destroyed their ship as punishment","Drowned when Charybdis swallowed their ship","Transformed permanently into animals by Circe"], answer:1 },
+  { id:27, unit:4, question:"How does Penelope finally verify Odysseus's true identity?", options:["A footrace against the suitors","Asking him to describe a scar from his childhood","Ordering a servant to move their bed — which is carved from a living olive tree and cannot be moved","A riddle contest with the suitors"], answer:2 },
+  { id:28, unit:4, question:"How did Perseus safely approach and behead Medusa?", options:["He wore the cap of invisibility and kept his eyes shut","He used Athena's polished shield as a mirror, seeing only her reflection","He attacked at night while she was asleep and unaware","He used a magic potion from the Graiae to temporarily freeze her"], answer:1 },
+  { id:29, unit:4, question:"Why must Bellerophon die alone, lame, and wandering?", options:["He killed Chimaera against the gods' explicit wishes","He tried to fly Pegasus to Olympus itself — a mortal claiming to reach divine status (hubris)","He betrayed Proetus by revealing the letter","He refused a direct command from Zeus"], answer:1 },
+  { id:30, unit:4, question:"How was the Aegean Sea named?", options:["After Aegisthus, who drowned there","After Aeneas, who crossed it fleeing Troy","After King Aegeus who jumped into it believing Theseus (black sails) was dead","Named by Homer in the Iliad"], answer:2 },
+  { id:31, unit:4, question:"How does Heracles trick Atlas to get the Hesperides' golden apples?", options:["He defeats Atlas in wrestling","He uses Medusa's head to threaten Atlas","He holds the sky while Atlas fetches apples, then pretends to adjust padding and walks away","He sends Iolaus as a decoy"], answer:2 },
+  { id:32, unit:4, question:"How does Nessus ultimately cause Heracles' death?", options:["Direct combat with a poisoned spear","Tricks Deianira: 'my blood is a love potion' — actually Hydra venom from Heracles's own arrow","A Fury-sent curse from Olympus","Poisoned wine at a feast"], answer:1 },
+  { id:33, unit:4, question:"What foreshadowing occurs during the Erymanthian Boar labour?", options:["Heracles meets Deianira for the first time","He accidentally wounds the immortal centaur Chiron with a Hydra-poisoned arrow","He fights Hades himself","He discovers where the Hesperides live"], answer:1 },
+  { id:34, unit:4, question:"Heracles physically wrestles Death (Thanatos) during which labour?", options:["Labour 7 — Cretan Bull","Labour 8 — Mares of Diomedes (stops at Pherae; wins Alcestis back for Admetus)","Labour 12 — Cerberus","After all labours are complete"], answer:1 },
+  { id:35, unit:4, question:"Who finally lights Heracles' funeral pyre, and what do they receive?", options:["Deianira lights it; she receives Heracles's divine blessing","Iolaus lights it; he receives immortality","Philoctetes lights it; he receives Heracles's bow and arrows (used crucially at Troy)","Hephaestus lights it by divine command"], answer:2 },
 ];
 
-export const TIMELINE: TimelineItem[] = [
-  { date: '~40,000 BCE', title: 'People first enter Greece', desc: 'Neolithic period. Around 6500 BCE: agriculture in early Neolithic (Late Stone Age). These inhabitants were not yet Greek speakers.' },
-  { date: '3000–1600 BCE', title: 'Early & Middle Bronze Ages', desc: 'Bronze technology transforms tools and weapons. Greek speakers arrive in Greece during this period. Sumerian and Akkadian civilizations of Mesopotamia far more advanced than anything in Greece at this point.' },
-  { date: '1600–1150 BCE', title: 'Late Bronze Age — Mycenaean', desc: 'Most important period for mythology. Arthur Evans discovers Knossos palace on Crete (1899). Minoan civilization heavily influences mainland Mycenaean culture. Many roots of Trojan War myths trace here. Mycenaean kingdoms flourish ca. 1600–1150 BCE.', importance: 'high' },
-  { date: 'ca. 1200 BCE', title: 'Collapse of Mycenaean civilization', desc: 'For reasons not entirely clear — possibly invasion, climate, internal collapse — Mycenaean civilization collapses. Greece enters what historians call a "dark age."' },
-  { date: '1150–900 BCE', title: 'Dark Age', desc: 'Political and cultural impoverishment. Notable achievements: mastery of iron technology; development of the alphabet; new shapes and designs in pottery. Oral transmission of myths continues.' },
-  { date: '750–500 BCE', title: 'Archaic Period — myths first written down', desc: 'Myths first recorded in writing, sometime in late 8th or early 7th century BCE. Hesiod and Homer compose during this period. These are the first surviving written versions. Colonization, expansion, innovation characterize this era.', importance: 'high' },
-  { date: '500–323 BCE', title: 'Classical Period', desc: 'Dominated by Athenian perspective. The three great tragedians — Aeschylus, Sophocles, and Euripides — deal primarily with mythological themes. Dramatic performances of myth in Athens become a major cultural institution.', importance: 'high' },
-  { date: '323–30 BCE', title: 'Hellenistic Period', desc: 'Begins after Alexander the Great\'s death (323 BCE), ends with Cleopatra\'s death (30 BCE). Greek scholarship and study of literary past begins in earnest. Myths retold and recorded in many versions simultaneously.' },
-  { date: '753–27 BCE', title: 'Foundation of Rome / Roman Republic', desc: 'Traditional founding date 753 BCE. First Roman literature: Plautus and Terence (comic plays). Late Republic: Lucretius, Catullus, Cicero, Sallust — all active. Roman literature draws on Greek myth.' },
-  { date: '27 BCE–200 CE', title: 'Early & High Roman Empire', desc: 'Rise of Augustus (27 BCE). Vergil (Aeneid) and Ovid (Metamorphoses) rise to fame — our most important Roman literary sources for mythology. Apuleius writes ca. 2nd century CE.', importance: 'high' },
+export const writtenPrompts = [
+  { id:1, unit:1, prompt:"Discuss TWO different theoretical approaches to interpreting Greek myths (e.g. Freudian, Jungian, functionalist, structuralist, Euhemerism). What does each approach reveal about myths, and what are its limitations?",
+    keyPoints:["Name and clearly explain both theories","Apply each to a SPECIFIC myth or character with details","State what each approach illuminates about why myths were created or what they mean","Acknowledge the limitations of each approach — show critical thinking, not just summary"] },
+  { id:2, unit:1, prompt:"What is hubris and how is it depicted in Greco-Roman mythology? Discuss at least TWO myths as examples, explaining the divine response and what each reveals about Greek religious and moral values.",
+    keyPoints:["Define hubris precisely: overstepping mortal station, claiming superiority to or challenging gods","Examples: Niobe (boasts over Leto → all 14 children killed); Arachne (weaving contest → turned to spider); Bellerophon (tries to reach Olympus → falls); Pentheus (denies Dionysus → torn apart)","Pattern in all cases: transgression → divine punishment → implicit lesson","What this reveals: gods enforce cosmic hierarchy; mortals must recognize their station"] },
+  { id:3, unit:2, prompt:"Analyze the myth of Demeter and Persephone as an aetiological myth. What natural phenomena does it explain, and what does it reveal about Greek attitudes toward death, the afterlife, and religious mystery?",
+    keyPoints:["Define 'aetiological myth' clearly first","Seasons: Persephone's annual return/departure directly causes spring-summer/autumn-winter — Demeter's emotions run the agricultural year","Eleusinian Mysteries: what they are (secret rites at Eleusis), who could be initiated, what they promised (blessed afterlife)","Significance: this myth provided the religious framework for the most important mystery cult in the ancient world for ~2000 years","Death as threshold: pomegranate seeds bind Persephone — eating in underworld has consequences"] },
+  { id:4, unit:2, prompt:"Compare Prometheus and Pandora as figures who represent humanity's relationship to the gods. What does each myth reveal about Greek views of human suffering, gender, and the origins of civilization?",
+    keyPoints:["Prometheus: fire = civilization, technology, progress; rebellion against divine authority; culture hero AND trickster; eternal suffering for humanity's benefit","Pandora: first woman; created as divine punishment for humanity; opens jar releasing evils; Hope remains — ambiguous gift","Both explain the human condition: why life involves hard work, sickness, and suffering","Gender dimension: Prometheus (male benefactor) vs. Pandora (female bringer of trouble) — reflects Greek anxieties; connect to the course's discussion of women in myth"] },
+  { id:5, unit:3, prompt:"Compare how Homer, Plato, and Virgil depict the afterlife. What are the key differences in their visions, and what does the evolution of these views reveal about changing ancient thinking?",
+    keyPoints:["Homer (Odyssey 11): all mortals go to gloomy Hades; NO moral judgment; need blood for consciousness; Achilles regrets his choice; punishment only for offending gods","Plato (Myth of Er): complete transformation — moral judgment; 10× punishment/reward; reincarnation; Lethe; only philosophers escape","Virgil (Aeneid 6): most elaborate; Tartarus punishes both offenses against gods AND crimes against humans; Elysium houses future Romans; Dido's silence; Gate of Horn/Ivory; influenced Dante","Overall arc: Homer (amoral) → Plato (philosophical/moral) → Virgil (Roman moral synthesis with patriotic dimension)"] },
+  { id:6, unit:3, prompt:"Using the Theban Saga and/or the Mycenaean Saga, discuss the theme of 'curse' in Greek mythology. How do curses function in these narratives, and what do they reveal about Greek ideas of fate, guilt, and divine justice?",
+    keyPoints:["Theban: Laius's oracle; Oedipus's prophecy; all precautions fail; sins of parents visited on children; miasma (pollution) passes through generations","Mycenaean: Tantalus → Pelops → Atreus → Agamemnon → Orestes — each generation's crimes exceed the previous; cycle of violence multiplies","Curses as divine mechanism: transgression creates pollution that must be purified; justice operates across time","Resolution of Mycenaean saga: Orestes's acquittal at Athens — shift from blood vengeance to civic law; represents historical/political progress","Tension throughout: are characters guilty if fate drove them? Can the divine will be escaped?"] },
+  { id:7, unit:3, prompt:"The Iliad has been called 'a poem about the costs of heroic values.' Discuss this claim using specific scenes and characters. What does the poem reveal about heroism, glory, and mortality?",
+    keyPoints:["Achilles: chooses kleos (glory) over long life; withdraws when dishonored — his pride vs. loyalty to Greeks conflict","Patroclus's death: the direct consequence of Achilles's withdrawal; grief overcomes rage","Hector: defends family and city; knows he will die but fights anyway — humanized, sympathetic Trojan","Priam ransoms Hector: Achilles sees his own father in the old king; both weep; transcends war momentarily","Agamemnon's arrogance + Achilles's pride + Paris's cowardice = mass death of thousands; the system's costs are explicit"] },
+  { id:8, unit:4, prompt:"Analyze Odysseus as a hero. How does he differ from traditional heroes like Achilles or Heracles? What qualities does the Odyssey celebrate, and what does it criticize?",
+    keyPoints:["Odysseus: polymetis (cunning), survivor, adaptable, skilled liar — contrasts sharply with strength-based heroes","Positive: loyalty to Ithaca, Penelope, Telemachus; self-control (Calypso's immortality offer refused); endurance through 10 years of trials","Negative: pride with Polyphemus costs him everything; ruthless slaughter of suitors; somewhat callous about crewmen's deaths","Penelope as his counterpart: same cunning (loom ruse = beggar disguise), same loyalty; the epic values both equally","The Odyssey celebrates: intelligence, domestic values, homecoming (nostos) — a different kind of heroism than the Iliad"] },
+  { id:9, unit:4, prompt:"Discuss the significance of the Twelve Labours of Heracles. What do they represent individually and collectively? How do they reflect the Greek conception of heroism and the relationship between mortals and the divine?",
+    keyPoints:["Penance: labours are purification for killing his family — suffering cleanses guilt","Civilizing force: labours rid the world of monsters and chaos; Heracles protects humanity","Death in every labour: Labour 12 (Cerberus), Labour 8 (wrestles Thanatos) — conquest of mortality itself","Humility dimension: serves Eurystheus, a lesser man — even the greatest hero must submit","Bridge to apotheosis: the labours are suffering on a cosmic scale, which earns Heracles the only mortal divinization in classical myth"] },
+  { id:10, unit:4, prompt:"How does the myth of Orpheus and Eurydice reflect Greek attitudes toward love, death, music, and the relationship between humans and the divine order?",
+    keyPoints:["Music as transcendent: art (music/poetry) briefly overcomes death itself — the gods weep; even Tantalus and Sisyphus stop; divine law suspended","The condition: divine order cannot be permanently suspended, even for love; Orpheus must obey the rule","The look back: ambiguous motivation — love, doubt, impatience; the tragedy is HOW he fails, not that he tried","Orphism: Orpheus's death creates a mystery religion about the soul's journey; music and prophecy linked to divinity","Art and mortality: the myth explores why poetry/music has such power — because it touches the deepest human fears"] },
+  { id:11, unit:4, prompt:"Select ONE major hero (Perseus, Theseus, Heracles, or Odysseus) and analyze how their story reflects key features of the 'hero myth' pattern discussed in the course.",
+    keyPoints:["Unusual or divine birth","Early threat or extraordinary feat in infancy/childhood","Quest with divine helpers and magical gifts/weapons","Confrontation with monstrous forces (often connected to death)","Return, recognition, and restoration of order","The hero's moral complexity or flaw that prevents simple idealization","Connection to a specific place/community — hero's power linked to a city or region"] },
+  { id:12, unit:3, prompt:"Female characters play pivotal roles in the Theban and Mycenaean sagas — Jocasta, Clytemnestra, Antigone. Analyze how women are portrayed in these myths and what their actions reveal about Greek society, gender, and moral authority.",
+    keyPoints:["Jocasta: passive victim of fate, or does she know more than she admits? Her suicide = cannot live with the truth","Clytemnestra: the most powerful woman in Greek tragedy; her revenge is arguably justified (Iphigenia's murder, Cassandra brought home); yet ancient sources generally condemn her; explore the double standard","Antigone: defies state authority (Creon) for religious duty (bury her brother); read as challenging tyranny; gender adds to Creon's outrage — that a WOMAN challenges him","Greek society: women had limited public roles; myth gives them enormous private destructive and moral power","Contrast with Penelope (faithful, clever, passive-seeming) — what models of womanhood does each represent?"] },
 ];
 
-export const THEORIES: TheoryItem[] = [
-  {
-    name: 'Etiology',
-    thinker: 'General ancient approach',
-    summary: "Myths explain causes or origins (Greek 'aitia' = cause).",
-    detail: "Etiological reading interprets myths as explanations of origins — physical, social, or ritual. The Homeric Hymn to Demeter explains the founding of the Eleusinian cult and the origin of the seasons. Apollo's killing of the Python at Delphi explains why the oracle and its priestess are called Pythian. Aphrodite's name 'aphros' (foam) is explained by her birth from sea foam. The Spartoi explain Thebes's noble lineages.",
-    strength: 'Directly connects myth to historically real religious practices and institutions.',
-    weakness: 'Cannot explain myths with no clear etiological function; many myths simply tell stories without explaining origins.',
-  },
-  {
-    name: 'Allegory & Symbolism',
-    thinker: 'Max Müller (19th c.)',
-    summary: 'Myths symbolically represent aspects of human nature and universal truths, or (Müller) natural phenomena.',
-    detail: 'Müller and his followers read all myths as allegories of cosmological/natural phenomena: Apollo = the sun, his arrows = sunrays, Daphne\'s transformation into a laurel = the disappearance of the dawn. The disguise Aphrodite uses to fool Anchises represents the deceptive side of erotic love. More broadly, allegorical reading finds universal truths behind the individual narrative details.',
-    strength: 'Can explain mythic patterns that recur across cultures as expressions of shared human experience.',
-    weakness: 'Far too reductive — most myths cannot be mapped onto natural phenomena. Müller\'s readings now considered pseudoscientific.',
-  },
-  {
-    name: 'Psychoanalysis — Freud',
-    thinker: 'Sigmund Freud',
-    summary: 'Myths fulfill repressed wishes and desires, like dreams. The Oedipus complex is its founding example.',
-    detail: 'Freud connected dreams and myths directly: both fulfill repressed wishes and desires, both condense and displace the content of the unconscious. His most famous application is the Oedipus complex — the Greek myth expresses the repressed desire that all children (boys especially) feel to possess their mothers and eliminate their fathers. Myth is "a waking attempt to understand and explain the impulses of the dream world."',
-    strength: "Explains why certain mythic patterns (the hero's journey, incest taboo stories) appear across cultures.",
-    weakness: "Over-generalizes; too centered on sexuality; fails to account for cultural specificity. Malinowski's decisive critique.",
-  },
-  {
-    name: 'Psychoanalysis — Jung',
-    thinker: 'Carl Jung',
-    summary: "Myths project humanity's collective unconscious. Mythic images are universal archetypes.",
-    detail: "Jung extended Freud: myths are not just expressions of individual unconscious desire but projections of the collective unconscious — the shared unconscious tendencies and fears of all humanity. Recurring mythic figures (the Hero, the Great Mother, the Shadow, the Wise Old Man, the Trickster) are archetypes: deep structural patterns that surface across all cultures' mythologies independently because they are embedded in the human psyche itself.",
-    strength: 'Better accounts for cross-cultural parallels than Freud; less reductively sexual; applicable to art and literature broadly.',
-    weakness: "Also over-generalizes; the 'archetypes' may reflect Jungian categories more than universal human structures.",
-  },
-  {
-    name: 'Myth & Society',
-    thinker: 'Frazer & Malinowski',
-    summary: 'Myth is inseparable from the social and ritual context of the culture that produced it.',
-    detail: "J.G. Frazer (The Golden Bough) drew a direct link between myth and religious ritual — they are two sides of the same cultural coin. Bronisław Malinowski (Polish anthropologist) argued more radically that you must live within a culture to understand its myths at all. Myths do not have universal meanings: they are functional stories that reflect specific social customs, beliefs, and practices. The Eleusinian Mysteries cannot be understood without the Demeter myth, and vice versa.",
-    strength: "Respects cultural particularity; explains why myths differ so significantly across cultures; grounds myth in lived practice.",
-    weakness: "Makes cross-cultural comparison difficult; may underplay the genuine structural parallels between different cultures' myths.",
-  },
-  {
-    name: 'Structuralism',
-    thinker: 'Claude Lévi-Strauss (& Vladimir Propp)',
-    summary: 'Myths are mechanisms for mediating fundamental binary oppositions in human thought.',
-    detail: "Propp identified recurring structural sequences ('functions') in folk tales that appear across cultures. Lévi-Strauss argued more broadly that all social interactions — and myths — are organized around fundamental binary oppositions: raw/cooked, nature/culture, mortal/immortal, male/female. These binary structures appear beneath the surface of all cultures' myths. Applied to Hesiod: the Theogony traces a movement from female-dominated primordial power (Gaia, Rhea) to male-dominated civic order (Zeus), with Zeus eventually incorporating female wisdom by swallowing Metis.",
-    strength: "Finds universal structural patterns; enables systematic cross-cultural comparison; reveals hidden organizing principles.",
-    weakness: 'Criticized for imposing the analyst\'s own cultural categories; may be too rigid and reductive; denies cultural specificity.',
-  },
-  {
-    name: 'Walter Burkert\'s Synthesis',
-    thinker: 'Walter Burkert',
-    summary: 'Grounds structuralist and psychological approaches in specific historical and religious context.',
-    detail: "Burkert argued that myth cannot be separated from the particular culture that produced it — historical and religious context is essential. At the same time, he acknowledged that myths can share structural sequences across cultures and that universal human concerns (violence, sexuality, kinship, death) inevitably surface in myths everywhere. His approach is deliberately synthetic: it accepts the insights of structuralism, psychology, and the society-ritual school, while insisting that all such interpretations be grounded in historical particularity.",
-    strength: 'Most inclusive and intellectually flexible approach; respects both universal patterns and cultural particularity.',
-    weakness: 'Less theoretically radical than the approaches it synthesizes; may be too eclectic to generate bold new readings.',
-  },
-  {
-    name: 'Feminist Approaches',
-    thinker: 'Various 20th-21st c. scholars',
-    summary: 'Focus on the psychological and social situations of female characters; question patriarchal assumptions.',
-    detail: "Over the past century, feminist scholars have interrogated the assumptions embedded in Greco-Roman myths about women, gender, and sexuality. Myths like Pandora (the first woman as a punitive creation whose curiosity brings evil), the Actaeon myth (in which a woman's privacy is the supreme value requiring lethal enforcement), and the Callisto myth (in which a rape victim is punished twice — by expulsion and transformation) reveal deeply patriarchal social structures. Reading these myths through a feminist lens does not 'correct' them but exposes the social values they were written to reinforce.",
-    strength: "Recovers suppressed perspectives; reveals the ideological work myths do in maintaining social hierarchies.",
-    weakness: "Risk of anachronism — applying modern categories to ancient texts. Best practiced with historical grounding.",
-  },
+export const heroes = [
+  { name:"Odysseus", unit:4, alias:"Ulysses (Roman)", description:"King of Ithaca and greatest hero of cunning. Polymetis ('of many minds'), resourceful, and adaptable. Unique among Greek heroes for valuing intelligence over strength. Takes 10 years to return from Troy after offending Poseidon by blinding his son Polyphemus.", traits:["Cunning (polymetis)","Resourceful under pressure","Enduring and patient","Deeply loyal to Ithaca and family","Ruthless when necessary"], keyMyths:["The Odyssey — 10-year homecoming","The Trojan Horse (his idea)","Contest of the bow and slaughter of suitors"], sources:["Homer's Odyssey","Homer's Iliad","Ovid's Metamorphoses 13-14"] },
+  { name:"Heracles", unit:4, alias:"Hercules (Roman)", description:"Greatest Greek hero of physical strength. Semi-divine son of Zeus and Alcmena. Driven by Hera's jealousy from birth. The ONLY mortal in classical mythology to achieve full divinization (apotheosis). Known for lion skin and club.", traits:["Superhuman strength","Prone to destructive rage","Civilizing force — conquers chaos","Suffering purifies him","Bridge between mortal and divine"], keyMyths:["Twelve Labours (penance for killing family)","Wrestling Death for Alcestis","Apotheosis on Mount Oeta; Philoctetes lights pyre"], sources:["Apollodorus Library 2.4-7","Euripides' Heracles","Sophocles' Women of Trachis","Diodorus Siculus 4"] },
+  { name:"Perseus", unit:4, alias:"No Roman equivalent", description:"Classic quest hero of the Argolid. Son of Zeus and Danaë. Famous for killing Medusa using divine gifts and Athena's guidance. His story follows the archetypal quest myth pattern with unusual perfection — and ends with accidental fulfillment of a prophecy he tried to escape.", traits:["Brave and decisive","Aided by gods at every step","Somewhat arrogant","Clever in using his divine gifts"], keyMyths:["Quest for Medusa's head","Rescue of Andromeda from sea monster","Accidental killing of grandfather Acrisius (prophecy fulfilled)"], sources:["Apollodorus 2.4.1-5","Ovid's Metamorphoses 4-5","Pindar's Pythian Ode 12"] },
+  { name:"Theseus", unit:4, alias:"No Roman equivalent", description:"National hero of Athens — its Heracles. Son of Aegeus (or Poseidon). Famous for the six labours on the road to Athens and for killing the Minotaur. His story is deeply intertwined with Athenian civic identity. Morally complex: abandons Ariadne, causes his father's death, brings about Hippolytus's death.", traits:["Brave and physically powerful","Politically significant — champion of Athens","Morally complex — not simply virtuous","Parallels Heracles in structure"], keyMyths:["Six labours on road to Athens","Minotaur and the labyrinth","Death of Aegeus / Aegean Sea naming"], sources:["Plutarch's Life of Theseus","Apollodorus 3.15-16, Epitome 1","Catullus 64"] },
+  { name:"Achilles", unit:3, alias:"Achilleus", description:"Greatest warrior of the Greeks at Troy. Son of sea-nymph Thetis and mortal Peleus. Central figure of Homer's Iliad. Famous for his rage (menis), his choice of glory over long life, and for his surprising capacity for tenderness when ransoming Hector's body to Priam.", traits:["Unmatched in combat","Pride can override judgment","Fierce capacity for love and grief","Bound by prophecy — short but glorious life"], keyMyths:["Rage against Agamemnon — Iliad's opening theme","Death of Patroclus and revenge on Hector","Ransoming Hector's body to Priam — Iliad's closing"], sources:["Homer's Iliad","Homer's Odyssey Book 11","Ovid's Metamorphoses 12-13"] },
+  { name:"Oedipus", unit:3, alias:"Oedipus Rex (Latin)", description:"King of Thebes. The ultimate figure of prophesied tragedy. Despite every effort to escape his fate — kill his father, marry his mother — he fulfills the prophecy anyway. Symbol of the power of fate, the limits of human knowledge, and what Aristotle calls hamartia. Freud named his most famous theory after this myth.", traits:["Brilliant — solves the Sphinx","Relentless in pursuit of truth","Quick to anger","Ultimately accepts his fate with dignity"], keyMyths:["Exposure as infant, raised in Corinth","Killing Laius at crossroads unknowingly","Solving the Sphinx; revelation and self-blinding","Oedipus at Colonus — mysterious death near Athens"], sources:["Sophocles' Oedipus Rex (~429 BCE)","Sophocles' Oedipus at Colonus (~401 BCE)","Sophocles' Antigone (~441 BCE)"] },
 ];
 
-// Additional decks appended
-export const EXTRA_DECKS: Deck[] = [
-  {
-    name: 'Heroes & Mortals',
-    color: 'terra',
-    cards: [
-      { q: "What is Achilles' central choice?", a: "Short glorious life at Troy with imperishable kleos, or long obscure life at home. He chose Troy.", sub: "His menis (wrath) is the first word of the Iliad — it structures the entire poem" },
-      { q: "What is Odysseus's defining quality?", a: "Polytropos — 'the man of many ways/wiles.' He survives through cunning, intelligence, and adaptability.", sub: "Athena's favourite; opposite of Achilles in every respect" },
-      { q: "What are the Twelve Labors of Heracles?", a: "1.Nemean Lion 2.Lernaean Hydra 3.Erymanthian Boar 4.Ceryneian Hind 5.Stymphalian Birds 6.Augean Stables 7.Cretan Bull 8.Mares of Diomedes 9.Belt of Hippolyta 10.Cattle of Geryon 11.Apples of Hesperides 12.Cerberus", sub: "Performed as penance for killing his own wife and children in Hera-sent madness" },
-      { q: "How does Heracles die?", a: "The centaur Nessus tricks his wife Deianira into smearing his robe with Nessus's blood (actually poison). Heracles puts on the robe and is consumed. He burns himself on a pyre on Mt. Oeta and is apotheosized.", sub: "The greatest hero destroyed by love and a shirt — Sophocles' Women of Trachis" },
-      { q: "Who are Perseus's divine helpers and their gifts?", a: "Athena: mirrored shield. Hermes: winged sandals and cap of invisibility. The Graeae led him to the Nymphs.", sub: "Perseus = archetypal quest hero; he beheads Medusa and rescues Andromeda" },
-      { q: "What is Theseus's greatest deed and what city is he connected to?", a: "Killed the Minotaur in the Labyrinth of Crete using Ariadne's thread. He is the founding hero of Athens.", sub: "Also: united Attica; descended to Underworld to steal Persephone (got stuck until Heracles freed him)" },
-      { q: "What makes Jason morally ambiguous?", a: "He succeeds largely through Medea's supernatural help, then abandons her for a Corinthian princess. Success through others' sacrifice, then betrayal.", sub: "Euripides' Medea: she kills her own children to punish Jason's betrayal" },
-      { q: "What is Aeneas's defining virtue?", a: "Pietas — duty to the gods, to family, and to the state. He carries his father on his back from burning Troy.", sub: "Contrast with Achilles (individual honor/kleos) — this is the Roman heroic ideal" },
-      { q: "How does Hector differ from Achilles as a hero?", a: "Hector fights not for personal glory (kleos) but for family and city. He is the most humanly sympathetic figure in the Iliad — a defender, not a glory-seeker.", sub: "His farewell to wife Andromache and infant son Astyanax (Iliad Book 6) is one of the most moving scenes in epic poetry" },
-      { q: "What is the significance of Oedipus solving the Sphinx's riddle?", a: "Intelligence, not physical strength, is his heroic power. But that same relentless intelligence drives his discovery of the truth about himself — knowledge becomes catastrophe.", sub: "The riddle answer (Man) is deeply ironic: Oedipus does not know what 'man' fully means until the end" },
-    ],
-  },
-  {
-    name: 'Roman Mythology',
-    color: 'slate',
-    cards: [
-      { q: "What is the Aeneid's central purpose?", a: "To create a founding myth for Rome — tracing the Roman people back to Troy through Aeneas, divine son of Venus, whose descendants include Romulus, Remus, and ultimately Augustus.", sub: "Vergil wrote it in the Augustan age (27 BCE–14 CE); it served political as well as literary purposes" },
-      { q: "What does Aeneas see in the Underworld in Aeneid Book 6?", a: "His father Anchises shows him the parade of future Roman heroes (the souls awaiting rebirth) — Romulus, Augustus, future emperors — a prophecy of Roman greatness.", sub: "The golden bough must be obtained first; the Sibyl of Cumae guides him" },
-      { q: "What is the Roman concept of pietas?", a: "Duty — to the gods, to family, and to the state. The supreme Roman virtue, embodied by Aeneas (pius Aeneas).", sub: "Contrast to Greek kleos (individual glory) — Roman heroism is collective and duty-bound" },
-      { q: "How do Roman authors relate to Greek mythology?", a: "Roman literature draws extensively on Greek myth but adapts it for Roman purposes — not slavishly copying but transforming to encode Roman values, history, and political ideology.", sub: "Vergil's Aeneid, Ovid's Metamorphoses, and Apuleius's Golden Ass are major examples" },
-      { q: "What is Mars's significance to Romans vs. Ares to Greeks?", a: "Romans: Mars = victorious war + crops/harvest + father of Romulus and Remus (Rome's founders). Greeks: Ares = hated, destructive god with almost no cult significance.", sub: "The same deity is culturally transformed entirely by a different society's values" },
-      { q: "Who was Romulus?", a: "Founder of Rome (traditionally 753 BCE). Son of Mars and the Vestal Virgin Rhea Silvia. Twin of Remus. Suckled by a she-wolf. Killed Remus and named the city after himself.", sub: "His deification after death = apotheosis as the god Quirinus" },
-      { q: "What is Ovid's Metamorphoses about?", a: "15 books retelling Greek and Roman myths from the Creation to Julius Caesar's apotheosis, unified by the theme of transformation (metamorphosis).", sub: "Key myths: Daphne, Actaeon, Niobe, Arachne, Orpheus, Pygmalion, Adonis, Callisto, Hyacinthus, Narcissus, Echo" },
-      { q: "What is distinctive about Apuleius's treatment of Isis?", a: "Isis delivers a famous syncretic speech in which she identifies herself as the universal goddess behind all divine names — 'the single form of the gods and goddesses.' She encompasses all female divine power.", sub: "Key text for understanding mystery religions and late antique religious syncretism" },
-      { q: "What does the Homeric Hymn to Aphrodite reveal about Near Eastern influence?", a: "Aphrodite corresponds closely to Sumerian Inanna and Akkadian Ishtar. Her major cult center was Cyprus — a Near Eastern gateway into Greece. In the Descent of Inanna, animals stop mating when she is absent, paralleling Aphrodite's power over nature.", sub: "Aphrodite was deeply influenced by Near Eastern goddess traditions" },
-      { q: "What is in Medias Res and which epics use it?", a: "Latin: 'into the middle of things.' Beginning a narrative in the middle of the action. Homer's Iliad begins in year 10 of the war; the Odyssey begins with Odysseus already held by Calypso for 7 years.", sub: "Vergil's Aeneid also uses it. Horace codified it as the proper technique for epic in Ars Poetica" },
-    ],
-  },
-  {
-    name: 'Creation & Cosmology',
-    color: 'gold',
-    cards: [
-      { q: "What emerged first from Chaos in Hesiod's Theogony?", a: "Gaia (Earth), Tartaros (dark underworld), and Eros (love) — along with Erebos (dark gloom) and Night.", sub: "Chaos itself is described as a 'yawning void' — not a person but a primordial state" },
-      { q: "The Titans — who are they and who is most important?", a: "Second generation of gods, children of Gaia and Ouranos. 12 Titans including Ocean, Kronos, Rhea, Themis, Mnemosyne. Kronos is most important — overthrows Ouranos and later is overthrown by Zeus.", sub: "Ocean = water; Hyperion = sun; Rhea and Kronos = earth and sky" },
-      { q: "The Five Ages of Humanity — name them in order", a: "1. Golden Age (close to gods, Kronos rules) → 2. Silver Age (pleasant but below Golden) → 3. Bronze Age (warlike) → 4. Age of Heroes (Trojan War heroes — inserted by Hesiod) → 5. Iron Age (Hesiod's own corrupt time).", sub: "Ovid has only 4 ages (no Age of Heroes). Each age represents moral decline from the previous." },
-      { q: "What is the Hurrian parallel to the Greek succession myth?", a: "In Hurrian mythology (south-east Asia Minor), the sky god Anu is castrated by Kumarbi, who then swallows parts of him — very close parallel to Ouranos and Kronos. Shows cross-cultural transmission.", sub: "Hurrian culture was assimilated into Hittite culture, which influenced Greek traditions" },
-      { q: "How does Aphrodite fit into the creation story?", a: "She is born from sea foam around the severed genitals of Ouranos when Kronos throws them into the sea — she is older than the Olympians. This is Hesiod's version; Homer makes her daughter of Zeus and Dione.", sub: "Her birth from sea foam explains her name: 'aphros' = foam in Greek" },
-      { q: "What are the primordial beings (not Titans, not Olympians)?", a: "Chaos; Gaia (Earth); Tartaros; Eros; Erebos; Night; then from Night and Erebos: Day and Aither (bright upper air).", sub: "These are abstractions that become personified — they represent the basic structure of existence" },
-      { q: "How does Prometheus trick Zeus at sacrifice?", a: "Wraps the meaty portion of the sacrificed ox in the stomach (unattractive), wraps the bones in white fat (attractive). Zeus chooses the bones/fat, establishing that gods receive the smoke of fat and bones while humans eat the meat.", sub: "This is why in Greek religion the gods received the fat and bones burned on altars" },
-      { q: "What does Pandora represent in Hesiod's account?", a: "The first woman, created by Hephaestus at Zeus's command as punishment for Prometheus's theft of fire. She opens a jar releasing all evils; only Hope remains inside. Hesiod's account is deeply misogynistic.", sub: "Pandora parallels Eve in Genesis — both are women associated with the entry of suffering into the world" },
-      { q: "What was in Pandora's jar and why does Hope remain?", a: "All the evils and diseases that afflict humanity. Pandora closes the lid before Hope (Elpis) can escape — it remains in the jar. The significance is debated: is Hope inside the jar a positive or negative thing?", sub: "This is one of the course's key open interpretive questions — the ambiguity is intentional" },
-      { q: "Binary opposites in Hesiod's Theogony — give three", a: "Male/female (Ouranos/Gaia); father/son (across all succession myths); sky/earth; order/chaos; matriarchal origins/patriarchal outcome. These are Lévi-Strauss's structural approach applied to the text.", sub: "Zeus's rise represents the triumph of patriarchal order — but he achieves it by incorporating female wisdom (swallowing Metis)" },
-    ],
-  },
+export const sources = [
+  { name:"Homer's Iliad", date:"~8th c. BCE", type:"Epic poem", topics:["Trojan War","Achilles","Hector","Oral poetry","Dactylic hexameter"], units:[3,4] },
+  { name:"Homer's Odyssey", date:"~8th c. BCE", type:"Epic poem", topics:["Odysseus","Underworld (Nekuia)","Homecoming","Penelope","Sirens"], units:[3,4] },
+  { name:"Hesiod's Theogony", date:"~700 BCE", type:"Didactic poem", topics:["Creation myth","Gods' genealogy","Titans","Titanomachy"], units:[2] },
+  { name:"Hesiod's Works and Days", date:"~700 BCE", type:"Didactic poem", topics:["Prometheus","Pandora","Five Ages of Man","Ethics"], units:[2] },
+  { name:"Homeric Hymn to Demeter", date:"~650 BCE", type:"Hymn", topics:["Demeter","Persephone","Eleusinian Mysteries","Seasons"], units:[2] },
+  { name:"Homeric Hymn to Dionysus", date:"~7th-6th c. BCE", type:"Hymn", topics:["Dionysus","Pirates","Divine power revelation"], units:[2] },
+  { name:"Sophocles' Oedipus Rex", date:"~429 BCE", type:"Tragedy", topics:["Oedipus","Fate","Hamartia","Theban Saga"], units:[3] },
+  { name:"Sophocles' Antigone", date:"~441 BCE", type:"Tragedy", topics:["Antigone","Creon","Divine law vs. state law"], units:[3] },
+  { name:"Sophocles' Oedipus at Colonus", date:"~401 BCE", type:"Tragedy", topics:["Oedipus's death","Athens","Mythnapping"], units:[3] },
+  { name:"Euripides' Bacchae", date:"~405 BCE", type:"Tragedy", topics:["Dionysus","Pentheus","Maenads","Ecstasy vs. reason"], units:[2] },
+  { name:"Euripides' Helen", date:"412 BCE", type:"Tragedy", topics:["Helen phantom theory","Trojan War","Divine manipulation"], units:[3] },
+  { name:"Aeschylus' Oresteia", date:"458 BCE", type:"Tragic trilogy (only surviving)", topics:["Agamemnon","Clytemnestra","Orestes","Justice","Areopagus"], units:[3] },
+  { name:"Plato's Republic Book 10 (Myth of Er)", date:"~380 BCE", type:"Philosophy", topics:["Afterlife","Reincarnation","Soul","Judgment"], units:[3] },
+  { name:"Plato's Phaedo", date:"~380 BCE", type:"Philosophy", topics:["Soul immortality","Body as prison","Death and the philosopher"], units:[3] },
+  { name:"Virgil's Aeneid", date:"29–19 BCE", type:"Latin epic", topics:["Aeneas","Underworld Book 6","Rome's origins","Dido"], units:[3,4] },
+  { name:"Ovid's Metamorphoses", date:"8 CE", type:"Latin epic", topics:["Transformation myths","Perseus","Orpheus","Midas","Tiresias"], units:[2,3,4] },
+  { name:"Apollodorus' Library", date:"1st–2nd c. CE", type:"Mythography", topics:["Perseus","Theseus","Heracles — systematic account"], units:[4] },
+  { name:"Apuleius' Metamorphoses (The Golden Ass)", date:"~160 CE", type:"Latin novel", topics:["Cupid and Psyche","Soul's journey","Love"], units:[2] },
+  { name:"Pindar's Odes", date:"5th c. BCE", type:"Lyric poetry", topics:["Heracles","Perseus","Bellerophon","Theban myths"], units:[4] },
+  { name:"Milton's Paradise Lost", date:"1667 CE", type:"English epic", topics:["Classical underworld legacy","Cerberus imagery in Book 2"], units:[3] },
 ];
 
-// ─── PDF-module specific flashcard decks ────────────────────────────────────
-
-export const PDF_DECKS: Deck[] = [
-  {
-    name: 'Apollo — Key Facts',
-    color: 'terra',
-    cards: [
-      { q: 'What are Apollo\'s six main domains?', a: 'Youth and male beauty, music/poetry, healing and purification, prophecy, archery, revenge and pestilence', sub: 'He is always depicted young, beardless, and athletic — the ideal of Greek masculinity' },
-      { q: 'What is the paradox of Apollo\'s nature?', a: 'He is simultaneously the god of healing AND the god of plague and pestilence — his arrows bring sudden death to men, yet he also cures disease', sub: 'At the start of the Iliad he rains plague on the Greeks; Asclepius his son is the god of medicine' },
-      { q: 'Why was Apollo born on Delos?', a: 'Leto was rejected everywhere due to Hera\'s jealousy. Delos alone swore an oath to host him, and Delos would be his first shrine. This is the aiton (etiological explanation) for the Delian cult.', sub: 'Apollo\'s actual shrine on Delos was founded around the eighth century BCE' },
-      { q: 'What does "Pytho/Pythios" mean, and how does it explain the name Delphi?', a: 'Pytho derives from pythein = "to rot." Apollo killed a great snake (Python) near Mt. Parnassos; its rotting carcass gave the site its name. Apollo = Pythios; his prophetess = the Pythia.', sub: 'The dolphin disguise explains the name "Delphi"' },
-      { q: 'Who is the Pythia and what is her role?', a: 'Apollo\'s prophetess at Delphi, appointed for life, expected to remain a virgin, made oracular pronouncements on the 7th day of each month (day sacred to Apollo)', sub: 'Delphi was a panhellenic cult — consulted by individuals and city-states throughout Greece' },
-      { q: 'What is the Homeric Hymn to Apollo about, and how many parts does it have?', a: 'Two distinct parts: (1) the Delos section — explains Apollo\'s birth and the founding of the Delian cult; (2) the Delphi section — explains how Apollo killed the Python and founded the oracle', sub: 'Both parts are etiological (aiton = cause/explanation) for actual historical cults' },
-      { q: 'What are the five longest Homeric Hymns in order?', a: '1) Dionysus (fragmentary), 2) Demeter, 3) Apollo, 4) Hermes, 5) Aphrodite', sub: 'There are 33 Homeric Hymns total; they were used as preludes to epic recitations at festivals' },
-      { q: 'What happens in Apollo\'s love affair with Marpessa, and what is the theme?', a: 'Zeus gives Marpessa the choice between Apollo (a god) and Idas (a mortal). She chooses Idas because gods are immortal and will outlive mortals — she prefers love that ends together.', sub: 'This introduces the recurring theme in Apollo\'s myths: the incompatibility of mortality and immortality' },
-      { q: 'What causes Apollo to fall in love with Daphne?', a: 'Apollo mocks Cupid\'s archery. Cupid retaliates: a gold arrow (love) strikes Apollo, a lead arrow (repulsion) strikes Daphne. Apollo pursues; she flees, prays to her father the river Peneus, and is transformed into a laurel tree.', sub: 'The laurel = Apollo\'s sacred tree, explains why he wears a laurel crown. Apollo\'s hubris caused his own suffering.' },
-      { q: 'How does Asclepius come to be born?', a: 'Apollo falls for Coronis, who cheats on him. Apollo\'s crow reports this. He kills Coronis with an arrow but repents — unable to save her, he rescues his unborn son from her corpse. Asclepius = god of medicine.', sub: 'Shows Apollo\'s dual revenge/healing nature most clearly' },
-    ],
-  },
-  {
-    name: 'Artemis — Key Facts',
-    color: 'olive',
-    cards: [
-      { q: 'What is Artemis\'s paradox?', a: 'She is a virgin goddess yet is also connected to childbirth. Explained by her myth: she was born first on Ortygia and immediately helped deliver her twin brother Apollo on Delos — she becomes a midwife at her very first act.', sub: 'She also brings sudden death to women in childbirth (her arrows = sudden death for women, as Apollo\'s = sudden death for men)' },
-      { q: 'What are Artemis\'s three main contrasts in the course?', a: '1) vs. Aphrodite (virgin vs. erotic love — Homeric Hymn to Aphrodite + Euripides\' Hippolytus). 2) vs. Athena (wilderness/nature vs. city/craft). 3) vs. Apollo (close partnership, but different domains)', sub: 'The Hippolytus myth = devotee of Artemis, rejects Aphrodite → Aphrodite destroys him' },
-      { q: 'What is the Actaeon myth and what is most important about it?', a: 'Actaeon, a great hunter, accidentally stumbles on Artemis bathing on Mt. Cithaeron. She transforms him into a stag; his own hounds kill him. The crucial point: the transgression was ACCIDENTAL — death was still the punishment.', sub: 'Artemis\'s virginity admits no exceptions, not even for accidents. This is the defining harshness of her character.' },
-      { q: 'Describe the Callisto myth and its outcome.', a: 'Callisto, a huntress-nymph in Artemis\'s band, is raped by Zeus disguised as Diana/Artemis. Her pregnancy is revealed at bathing; Artemis expels her. In Ovid: Hera turns her into a bear. Eventually becomes the constellation Ursa Major with her son Arcas.', sub: 'Callisto is entirely innocent yet still punished — the violation of a virginal state is abhorrent regardless of cause' },
-      { q: 'What is the Arkteia and where did it take place?', a: 'A religious ceremony at Brauron (32 km SW of Athens) every four years, attended by women of Athens. Girls "played the bear" (arktos = bear) before marriage: saffron robes, sacrifice, processions, dancing, foot races.', sub: 'The festival initiated girls into the cult of a goddess who would play an important role in their lives as mothers' },
-      { q: 'What happens to Orion at Artemis\'s hands?', a: 'Orion tries to rape Artemis. In anger, she makes a scorpion come out of the earth to sting him to death. He becomes the constellation Orion.', sub: 'In another version, Apollo tricks Artemis into shooting Orion herself by challenging her archery' },
-      { q: 'How does Artemis save the nymph Arethusa?', a: 'Arethusa is a hunting nymph pursued by the river god Alpheus. She prays to Artemis, who covers her in a cloud that sinks underground and flows as a river to Sicily, where Arethusa becomes a spring.', sub: 'Ovid, Metamorphoses Book 5 — Artemis defends the virginity of her followers' },
-    ],
-  },
-  {
-    name: 'Aphrodite — Key Facts',
-    color: 'terra',
-    cards: [
-      { q: 'What are the TWO versions of Aphrodite\'s birth?', a: '(1) Hesiod: from sea foam (aphros) around the severed genitals of Ouranos — primordial, older than Zeus. (2) Homer (Iliad 3): daughter of Zeus and Dione — this version subjugates her under Zeus\'s parentage.', sub: 'She first approaches Cythera, then sea-girt Cyprus. "Aphrodite" = foam-born.' },
-      { q: 'What three character traits does Aphrodite share with Pandora?', a: 'Seductive charm, fertility, and deception — both figures are explicitly described with these traits in Hesiod', sub: 'This connection is important: both are associated with female power that brings disruption to a male world' },
-      { q: 'Who are the three goddesses IMMUNE to Aphrodite\'s power?', a: 'Athena, Artemis, and Hestia — all virgin goddesses. This is stated at the opening of the Homeric Hymn to Aphrodite.', sub: 'The opening creates dramatic irony: Aphrodite, who cannot conquer these three, then falls to her own power when Zeus makes her love Anchises' },
-      { q: 'Why does Zeus make Aphrodite fall in love with Anchises, and what is the result?', a: 'Zeus is fed up with Aphrodite boasting that she makes gods sleep with mortals. He humbles her by turning her own power against her. She falls for the mortal shepherd Anchises and their union produces Aeneas — future founder of Rome (Vergil\'s Aeneid).', sub: 'Central irony: Aphrodite cannot resist herself' },
-      { q: 'What are Aphrodite\'s Near Eastern counterparts?', a: 'Sumerian Inanna and Akkadian Ishtar. Her major cult centre was Cyprus — a gateway between the Near East and Greece. In the Sumerian poem Descent of Inanna, animals stop mating when Inanna is absent (parallel to Aphrodite\'s power over nature).', sub: 'In the East she is always depicted clothed in elaborate jewellery; in the West she is better known nude' },
-      { q: 'Who is Adonis, what is his origin, and what happens to him?', a: 'Near Eastern (Semitic "Adon" = Lord). Aphrodite hides him in a chest given to Persephone — Persephone falls in love with him too. Zeus decrees he splits the year between them. He represents seasonal death and rebirth. In Ovid: killed by a boar → becomes the anemone flower.', sub: 'Adonis connects Aphrodite directly to Persephone and the cycle of seasons' },
-      { q: 'What is the myth of Pygmalion?', a: 'Pygmalion, disgusted with Cypriot women (who prostituted themselves as punishment from Aphrodite), falls in love with an ivory statue of his own making. He prays to Aphrodite; she animates the statue as Galatea, who bears him a son named Paphos.', sub: 'Ovid, Metamorphoses — basis for G.B. Shaw\'s Pygmalion and the musical My Fair Lady' },
-    ],
-  },
-  {
-    name: 'Athena — Key Facts',
-    color: 'slate',
-    cards: [
-      { q: 'How is Athena born, and why does this matter?', a: 'Zeus swallows his first wife Metis (wisdom personified) to prevent a prophecy that their son would overthrow him. Athena is then born fully armed from Zeus\'s head. She is simultaneously born masculine (armed, from a father alone) yet is female.', sub: 'Hephaestus splits open Zeus\'s head with an axe in some accounts (Pindar, 7th Olympian Ode)' },
-      { q: 'What is the fundamental distinction between Athena\'s war and Ares\'s war?', a: 'Athena = strategic, protective, civilizing war. She takes a thoughtful approach and serves as a protective goddess. Ares = destructive, brutal war that incites strife for its own sake. Zeus calls Ares "the most hateful of all gods."', sub: 'In Iliad Book 5, Athena helps Diomedes wound Ares — a mortal wounding a god, showing Athena\'s strategic superiority' },
-      { q: 'What does "Athena Ergane" mean?', a: 'Ergane = "Craftmaker" in Greek. Athena Ergane is her aspect as patron of craft — both masculine (carpentry, building the Trojan Horse) and feminine (weaving). Along with Hephaestus, she was said to be the first to teach craft skills to humans.', sub: 'She is also called "Athena Polias" (Protectress of the City) — patron of Athens, which was named after her' },
-      { q: 'Describe the myth of Arachne. What two things does it illustrate?', a: 'Arachne, a mortal weaver, matches or surpasses Athena\'s weaving skill. Athena challenges her; Arachne wins but Athena strikes her. Arachne hangs herself; Athena transforms her into a spider. (1) Etiological: explains why spiders weave. (2) Hubris: mortal competition against a god.', sub: 'Ovid, Metamorphoses — the match shows Athena\'s connection to craft; her rage shows her dangerous side' },
-      { q: 'Why is Athena the patron of Odysseus?', a: 'Athena is the goddess of wisdom and craft (metis = cleverness in Greek, also her mother\'s name). Odysseus is the clever hero — polytropos (man of many wiles). She protects him throughout the Odyssey because he embodies her domain: intelligence over brute force.', sub: 'Athena appears as Mentor (a male figure) to guide Telemachus in the Odyssey' },
-    ],
-  },
-  {
-    name: 'Eros / Cupid & Theories',
-    color: 'terra',
-    cards: [
-      { q: 'What are the TWO Eros figures in ancient tradition?', a: '(1) Hesiod\'s Eros: primordial cosmic force, present at the dawn of creation alongside Chaos, Gaia, and Tartaros — NOT the son of Aphrodite. (2) Classical/Hellenistic Eros: mischievous winged boy, son of Aphrodite, shoots gold and lead arrows.', sub: 'The module emphasizes this is a crucial distinction that is often tested' },
-      { q: 'What does Plato say about Eros in the Symposium?', a: 'Eros is NOT a god — he is a daimon (spiritual being between god and mortal). His nature is between good and bad, beautiful and ugly. He facilitates communication between gods and humans. His parents are Resourcefulness (Poros) and Poverty (Penia).', sub: 'Plato\'s Symposium is the key philosophical treatment of Eros' },
-      { q: 'What are Psyche\'s four impossible tasks set by Venus?', a: '1) Sort mixed grains by nightfall (ants help). 2) Gather golden fleece from dangerous sheep (a reed advises her). 3) Fetch water from the source of the Styx (Jupiter\'s eagle helps). 4) Bring a box of Persephone\'s beauty from the underworld (a tower gives instructions).', sub: 'Each task has a magical helper — but Psyche\'s own curiosity undoes her: she opens the box and falls into a death-like sleep' },
-      { q: 'Who wrote the myth of Cupid and Psyche, and when?', a: 'Apuleius, in his Metamorphoses (also known as The Golden Ass), second century CE. This is NOT Ovid\'s Metamorphoses — a common confusion.', sub: 'Psyche = "soul" in Greek; the myth can be read as an allegory of the soul\'s journey toward divine love' },
-      { q: 'Apply THREE theories to the myth of Cupid and Psyche.', a: '(1) Allegorical: Psyche = soul, Cupid = Love, her journey = soul\'s ascent to divine union. (2) Etiological: explains how Psyche was deified. (3) Freudian: Psyche\'s curiosity (opening the box, using the lamp) = forbidden desire disrupting idealized love.', sub: 'The myth rewards multiple interpretive frameworks — exactly what the exam long-answer questions ask for' },
-      { q: 'What is the course\'s key example for EACH of the five main theories?', a: 'Etiology → Homeric Hymn to Demeter (Eleusinian Mysteries + seasons). Freud → Oedipus complex (Sophocles\' Oedipus Rex). Jung → archetypes across Greek myths. Malinowski → cultural specificity of any myth. Lévi-Strauss → Theogony (male/female binary).', sub: 'Burkert synthesis → grounds structuralism in historical/religious context. Feminist → Pandora, Actaeon, Callisto' },
-    ],
-  },
-  {
-    name: 'Myth Theories — Applied',
-    color: 'slate',
-    cards: [
-      { q: 'Give the best Greco-Roman example for ETIOLOGY.', a: 'The Homeric Hymn to Demeter: explains (1) the origin of the seasons (Demeter\'s grief = winter) AND (2) why the Eleusinian Mysteries at Eleusis exist. Double etiological function from a single myth.', sub: '"Etiology" from Greek aitia (αἰτία) = cause' },
-      { q: 'Give the best Greco-Roman example for PSYCHOANALYSIS (Freud).', a: 'The Oedipus myth: Freud named the Oedipus complex directly from Sophocles\' Oedipus Rex. The myth of a son who kills his father and marries his mother is taken by Freud as a universal unconscious wish-fulfillment.', sub: 'Freud quote from the module: "our dreams convince us that we were, King Oedipus, who slew his father Laius and wedded his mother Jocasta"' },
-      { q: 'Give the best example for STRUCTURALISM (Lévi-Strauss).', a: 'Hesiod\'s Theogony: the poem is structured around the opposition between male and female throughout. Movement from Gaia\'s female-dominated origins to Zeus\'s male-dominated order. Zeus wins by incorporating female wisdom (swallowing Metis).', sub: 'Also: Prometheus myth — raw/cooked binary (the sacrifice trick with bones/fat vs. meat)' },
-      { q: 'What is the key strength of Burkert\'s synthesis, and why is it "inclusive"?', a: 'Burkert recognizes universal truths AND accepts structuralism and psychology, while grounding these approaches in the specific historical and religious context of a society. He avoids both over-generalization (Freud/Müller) and excessive particularism (Malinowski).', sub: 'He insists: myth cannot be separated from its historical context' },
-      { q: 'Name one myth that rewards FEMINIST interpretation and explain why.', a: 'Pandora (Hesiod, Works and Days): she is created as punishment for Prometheus\'s actions, is defined by deception and erotic charm, and is associated with the origin of human suffering. The myth encodes deep patriarchal assumptions about women as agents of misfortune.', sub: 'Also: Actaeon (punished for accidentally seeing a goddess); Callisto (punished for being raped)' },
-      { q: 'What is Max Müller\'s approach and why is it criticized?', a: 'Müller (19th century) read ALL myths as allegories of natural/cosmological phenomena: Apollo = the sun, his arrows = sunrays, etc. Criticized because this approach "cannot explain the majority of what one encounters in Greco-Roman mythology" — it over-generalizes.', sub: 'The course\'s Aphrodite example: her disguise when seducing Anchises = allegorical representation of erotic love\'s deceptive power' },
-    ],
-  },
-]
+export const greekRoman = [
+  { greek:"Zeus", roman:"Jupiter", domain:"King of gods, sky, thunder, lightning" },
+  { greek:"Hera", roman:"Juno", domain:"Queen of gods, marriage, childbirth" },
+  { greek:"Poseidon", roman:"Neptune", domain:"Sea, earthquakes, horses" },
+  { greek:"Demeter", roman:"Ceres", domain:"Grain, harvest, agriculture" },
+  { greek:"Athena", roman:"Minerva", domain:"Wisdom, warfare (strategy), crafts" },
+  { greek:"Apollo", roman:"Apollo", domain:"Sun, music, prophecy, healing, plague" },
+  { greek:"Artemis", roman:"Diana", domain:"Hunt, moon, chastity, childbirth" },
+  { greek:"Ares", roman:"Mars", domain:"War (violence, bloodlust)" },
+  { greek:"Aphrodite", roman:"Venus", domain:"Love, beauty, desire" },
+  { greek:"Hephaestus", roman:"Vulcan", domain:"Fire, metalworking, crafts" },
+  { greek:"Hermes", roman:"Mercury", domain:"Messenger, trade, travel, thieves" },
+  { greek:"Dionysus", roman:"Bacchus", domain:"Wine, ecstasy, theatre, vegetation" },
+  { greek:"Hestia", roman:"Vesta", domain:"Hearth, home, domestic life" },
+  { greek:"Hades", roman:"Pluto/Dis", domain:"Underworld, death, the dead" },
+  { greek:"Persephone", roman:"Proserpina", domain:"Underworld queen, spring renewal" },
+  { greek:"Eros", roman:"Cupid/Amor", domain:"Love, desire, attraction" },
+  { greek:"Heracles", roman:"Hercules", domain:"Greatest hero, strength, labours, apotheosis" },
+  { greek:"Odysseus", roman:"Ulysses", domain:"Cunning hero, wanderer, king of Ithaca" },
+  { greek:"Cronus", roman:"Saturn", domain:"Titan ruler, time, harvest" },
+  { greek:"Hecate", roman:"Trivia", domain:"Magic, crossroads, moon, ghosts, transitions" },
+  { greek:"Helios", roman:"Sol", domain:"The sun personified" },
+  { greek:"Tyche", roman:"Fortuna", domain:"Luck, fortune, fate" },
+];
