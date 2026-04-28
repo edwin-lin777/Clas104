@@ -4,7 +4,7 @@ export default function Dashboard() {
   const stats = [
     { n: "11", label: "Full Stories", sub: "With section quizzes" },
     { n: "20", label: "Modules", sub: "Units 1–4 complete" },
-    { n: "52", label: "Flashcards", sub: "Double-sided" },
+    { n: "125", label: "Flashcards", sub: "Double-sided" },
     { n: "120+", label: "Quiz Questions", sub: "MC + story quizzes" },
   ];
 
