@@ -22,7 +22,7 @@ export default function Stories() {
     const qs = selected.quizQuestions;
     const correct = submitted ? qs.filter((q,i)=>answers[i]===q.answer).length : 0;
     return (
-      <div style={{ padding:"3rem 3.5rem", maxWidth:780 }} className="fade-up">
+      <div className="page fade-up" style={{ maxWidth:780 }}>
         <button className="btn btn-outline" onClick={()=>{setQuizMode(false);setAnswers({});setSubmitted(false);}} style={{marginBottom:"2rem"}}>
           ← Back to story
         </button>
@@ -79,7 +79,7 @@ export default function Stories() {
     const unitCols:Record<number,string>={1:"#5a3e7a",2:"#8b4a00",3:"#8b1a1a",4:"#2d5a3a"};
     const uc = unitCols[selected.unit]||"var(--accent)";
     return (
-      <div style={{padding:"3rem 3.5rem",maxWidth:820}} className="fade-up">
+      <div className="page fade-up" style={{maxWidth:820}}>
         <button className="btn btn-outline" onClick={()=>{setSelected(null);setSec(0);}} style={{marginBottom:"2rem"}}>
           ← All stories
         </button>
@@ -154,7 +154,7 @@ export default function Stories() {
   }
 
   return (
-    <div style={{padding:"3rem 3.5rem",maxWidth:920}} className="fade-up">
+    <div className="page fade-up" style={{maxWidth:920}}>
       <div className="section-header">
         <div className="small-caps" style={{marginBottom:6}}>Myths &amp; Narratives</div>
         <h2 className="display" style={{fontSize:32,marginBottom:"0.5rem"}}>Stories</h2>

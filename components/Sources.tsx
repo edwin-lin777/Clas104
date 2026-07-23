@@ -2,7 +2,7 @@
 import { sources } from "@/lib/data";
 export default function Sources() {
   return (
-    <div style={{padding:"3rem 3.5rem",maxWidth:860}} className="fade-up">
+    <div className="page fade-up" style={{maxWidth:860}}>
       <div className="section-header">
         <div className="small-caps" style={{marginBottom:6}}>Reference</div>
         <h2 className="display" style={{fontSize:32,marginBottom:"0.5rem"}}>Ancient Sources</h2>

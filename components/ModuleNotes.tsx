@@ -10,7 +10,7 @@ export default function ModuleNotes() {
   const filtered = au==="all" ? moduleNotes : moduleNotes.filter(m=>m.unit===au);
 
   return (
-    <div style={{padding:"3rem 3.5rem",maxWidth:860}} className="fade-up">
+    <div className="page fade-up" style={{maxWidth:860}}>
       <div className="section-header">
         <div className="small-caps" style={{marginBottom:6}}>Study Notes</div>
         <h2 className="display" style={{fontSize:32,marginBottom:"0.5rem"}}>Module Notes</h2>

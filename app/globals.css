@@ -270,3 +270,115 @@ h1, h2, h3, h4 { font-family: var(--serif2); font-weight: 700; line-height: 1.25
   background: rgba(139,26,26,0.06);
   color: var(--accent);
 }
+
+/* ============ Mobile app shell & responsive polish ============ */
+html { overflow-x: hidden; }
+
+.app-shell { display: flex; min-height: 100vh; }
+
+/* Page container — replaces the old inline `padding:"3rem 3.5rem"` on every view */
+.page { padding: 3rem 3.5rem; width: 100%; }
+@media (max-width: 900px) { .page { padding: 2.25rem 2rem; } }
+@media (max-width: 560px) { .page { padding: 1.5rem 1.1rem; padding-bottom: calc(1.5rem + env(safe-area-inset-bottom)); } }
+
+/* Sidebar / mobile drawer */
+.mobile-topbar { display: none; }
+.sidebar-overlay { display: none; }
+
+.sidebar-nav {
+  width: 210px;
+  min-height: 100vh;
+  flex-shrink: 0;
+  background: white;
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 50;
+  transition: transform 0.25s ease;
+}
+
+@media (max-width: 768px) {
+  .app-shell { flex-direction: column; }
+
+  .mobile-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1.1rem;
+    padding-top: calc(0.85rem + env(safe-area-inset-top));
+    background: white;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    z-index: 60;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .hamburger span { display: block; width: 16px; height: 1.5px; background: var(--ink); }
+
+  .sidebar-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    max-width: 82vw;
+    height: 100vh;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.18);
+    padding-top: env(safe-area-inset-top);
+    z-index: 70;
+  }
+  .sidebar-nav.open { transform: translateX(0); }
+
+  .sidebar-overlay.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(20,16,12,0.42);
+    z-index: 45;
+  }
+}
+
+/* Touch target sizing — most buttons set their own inline padding/font-size,
+   which normally beats a stylesheet rule, so !important is needed here to
+   actually raise tap targets on mobile. */
+@media (max-width: 768px) {
+  .btn { padding: 11px 16px !important; font-size: 11px !important; }
+  .nav-item { padding: 12px 20px 12px 18px; }
+  .option-btn { padding: 13px 16px; }
+}
+
+/* Flashcards responsive grid (was a fixed 3-col inline grid) */
+.flashcards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; }
+@media (max-width: 900px) { .flashcards-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .flashcards-grid { grid-template-columns: 1fr; } }
+
+/* Greek/Roman equivalents table */
+.equiv-row { display: grid; grid-template-columns: 1fr 1fr 2fr; }
+@media (max-width: 560px) {
+  .equiv-row { grid-template-columns: 1fr 1fr; row-gap: 4px; }
+  .equiv-domain { grid-column: 1 / -1; }
+}
+
+/* Cheat sheet mini Olympians grid */
+.cheat-mini-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem; }
+@media (max-width: 560px) { .cheat-mini-grid { grid-template-columns: repeat(2,1fr); } }

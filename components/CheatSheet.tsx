@@ -40,7 +40,7 @@ export default function CheatSheet() {
   );
 
   return (
-    <div style={{padding:"3rem 3.5rem",maxWidth:960}} className="fade-up">
+    <div className="page fade-up" style={{maxWidth:960}}>
       <div className="section-header">
         <div className="small-caps" style={{marginBottom:6}}>Quick Reference</div>
         <h2 className="display" style={{fontSize:32,marginBottom:"0.5rem"}}>Cheat Sheet</h2>
@@ -106,7 +106,7 @@ export default function CheatSheet() {
 
       <div className="grid-2" style={{marginTop:"1rem"}}>
         <Box title="GREEK ↔ ROMAN (12 OLYMPIANS)" col="#5a3e7a">
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"0.5rem"}}>
+          <div className="cheat-mini-grid">
             {greekRoman.slice(0,12).map(g=>(
               <div key={g.greek} style={{textAlign:"center",padding:"8px 4px",background:"var(--parchment2)",borderRadius:1}}>
                 <div className="display" style={{fontSize:12,color:"var(--ink)",marginBottom:1}}>{g.greek}</div>

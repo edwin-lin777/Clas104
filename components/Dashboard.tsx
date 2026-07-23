@@ -35,7 +35,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div style={{ padding: "3rem 3.5rem", maxWidth: 900 }} className="fade-up">
+    <div className="page fade-up" style={{ maxWidth: 900 }}>
       {/* Header */}
       <div className="section-header">
         <div className="small-caps" style={{ marginBottom: "0.75rem" }}>Final Exam Preparation</div>

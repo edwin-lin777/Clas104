@@ -31,9 +31,9 @@ export default function Home() {
     }
   };
   return (
-    <div style={{ display:"flex", minHeight:"100vh" }}>
+    <div className="app-shell">
       <Sidebar active={active} onSelect={setActive} />
-      <main style={{ flex:1, overflowY:"auto", minHeight:"100vh", background:"var(--parchment)" }}>
+      <main style={{ flex:1, overflowY:"auto", minHeight:0, background:"var(--parchment)" }}>
         {render()}
       </main>
     </div>

@@ -86,7 +86,7 @@ export default function Flashcards() {
   ];
 
   return (
-    <div style={{ padding: "3rem 3.5rem", maxWidth: 820 }} className="fade-up">
+    <div className="page fade-up" style={{ maxWidth: 820 }}>
       <div className="section-header">
         <div className="small-caps" style={{ marginBottom: 6 }}>
           Active Recall
@@ -298,13 +298,7 @@ export default function Flashcards() {
       )}
 
       {mode === "grid" && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3,1fr)",
-            gap: "0.6rem",
-          }}
-        >
+        <div className="flashcards-grid">
           {filtered.map((c) => {
             const col =
               filter === "names"

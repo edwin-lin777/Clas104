@@ -3,7 +3,7 @@ import { heroes } from "@/lib/data";
 const unitCols:Record<number,string>={1:"#5a3e7a",2:"#8b4a00",3:"#8b1a1a",4:"#2d5a3a"};
 export default function Heroes() {
   return (
-    <div style={{padding:"3rem 3.5rem",maxWidth:860}} className="fade-up">
+    <div className="page fade-up" style={{maxWidth:860}}>
       <div className="section-header">
         <div className="small-caps" style={{marginBottom:6}}>Reference</div>
         <h2 className="display" style={{fontSize:32,marginBottom:"0.5rem"}}>Hero Profiles</h2>

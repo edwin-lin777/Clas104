@@ -7,7 +7,7 @@ export default function WrittenPractice() {
   const [shown, setShown] = useState<{[k:number]:boolean}>({});
   const filtered = au==="all"?writtenPrompts:writtenPrompts.filter(p=>p.unit===au);
   return (
-    <div style={{padding:"3rem 3.5rem",maxWidth:840}} className="fade-up">
+    <div className="page fade-up" style={{maxWidth:840}}>
       <div className="section-header">
         <div className="small-caps" style={{marginBottom:6}}>Paragraph Questions</div>
         <h2 className="display" style={{fontSize:32,marginBottom:"0.5rem"}}>Written Practice</h2>
